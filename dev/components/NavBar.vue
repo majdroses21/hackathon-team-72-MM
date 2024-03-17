@@ -1,7 +1,7 @@
 <template>
   <v-app class="navbar">
     <v-app-bar app color="#EEE">
-      <v-app-bar-nav-icon v-if="smAndDown"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-btn depressed>
         <i class="fal fa-sign-in me-3" />
         <v-icon icon="mdi-chevron-left"></v-icon>
@@ -33,26 +33,7 @@
 </template>
 
 <script>
-export default defineComponent({
-  computed: {
-    smAndDown() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return true;
-        case "sm":
-          return true;
-        case "md":
-          return false;
-        case "lg":
-          return false;
-        case "xl":
-          return false;
-        default:
-          return false;
-      }
-    },
-  },
-});
+export default defineComponent({});
 </script>
 <style scoped>
 .link {
