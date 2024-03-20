@@ -8,12 +8,13 @@
       </p>
     </div>
 
-    <div class="search">
+    <div class="search" dir="rtl">
       <input
         placeholder="ماذا تريد ان تتعلم اليوم"
         type="search"
         name=""
         id=""
+        dir="auto"
       />
       <v-btn class="btnsearch" rounded>بحــث</v-btn>
     </div>
@@ -79,22 +80,24 @@
   top: 70%;
   left: 10%;
   width: 40%;
-}
-.search input {
-  width: 100%;
-  height: 70px;
   border-radius: 30px;
   background-color: #fff;
   padding: 20px;
- &:focus {
-    outline: 3px solid gray;
+}
+.search  input {
+  width: 80% ;
+  height: 40px;
+  margin-right: 20%;
+  border: none;
+  &:focus {
+   outline: 0;
  }
 }
 .btnsearch {
   position: absolute;
-  right: 9px;
+  right: 20px;
   height: 50px;
-  top: 10px;
+  top: 17px;
   font-size: 25px;
 }
 </style>
