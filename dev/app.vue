@@ -1,15 +1,15 @@
 <template>
   <div>
     <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+
+    </NuxtLayout>
   </div>
+  <NuxtPage />
 </template>
 
-<style lang="scss">
-.class {
-  .child {
-
-  }
+<style>
+body {
+  box-sizing: border-box;
+  /* height: 3000000px; */
 }
 </style>
