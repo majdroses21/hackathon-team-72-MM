@@ -1,57 +1,80 @@
 <template>
-  <v-app class="navbar">
-    <v-app-bar app color="#EEE">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      <v-btn depressed>
-        <i class="fal fa-sign-in me-3" />
-        <v-icon icon="mdi-chevron-left"></v-icon>
-        تسجيل الدخول
-      </v-btn>
-
-      <nuxt-link class="link ll" to="/Skills"> تصفح المهارات</nuxt-link>
-      <nuxt-link class="link" to="/">تواصل معنا </nuxt-link>
-      <v-toolbar-title>
-        <!-- Spacer -->
+  <v-layout>
+    <v-app-bar elevation="3">
+      <v-container class="d-flex flex-row">
+        <!-- <v-app-bar-nav-icon v-if="!smAndDown"></v-app-bar-nav-icon> -->
+        <v-app-bar-nav-icon
+          v-if="smAndDown"
+          variant="text"
+          @click.stop="drawer = !drawer"
+        ></v-app-bar-nav-icon>
+        <v-avatar class="photoprofile" v-if="!smAndDown">
+          <v-img
+            alt="John"
+            src="https://cdn.vuetifyjs.com/images/john.jpg"
+          ></v-img>
+        </v-avatar>
+        <nuxt-link style="color: black" to="Sign-in">
+          <v-btn rounded="xl" v-if="!smAndDown" class="login" depressed>
+            <i class="fa-regular fa-right-to-bracket"></i>
+            <v-icon icon="mdi-chevron-left"></v-icon>
+            تسجيل الدخول
+          </v-btn>
+        </nuxt-link>
+        <v-btn rounded="xl">
+          <nuxt-link v-if="!smAndDown" class="link" to="contactus"
+            >تواصل معنا</nuxt-link
+          >
+        </v-btn>
+        <v-btn rounded="xl">
+          <nuxt-link v-if="!smAndDown" class="link" to="/Skills"
+            >تصفح المهارات</nuxt-link
+          >
+        </v-btn>
         <v-spacer></v-spacer>
+        <div class="logo">
+          <nuxt-link to="/">
+            <h1>fhrth</h1>
+          </nuxt-link>
 
-        <v-img src="../assets/images/images.jpg" max-height="48"></v-img>
-      </v-toolbar-title>
-
-      <v-toolbar-title>
-        <v-img src="/path/to/your/logo.png" max-height="48"></v-img>
-      </v-toolbar-title>
-
-      <!-- Spacer -->
-      <v-spacer></v-spacer>
-      <nuxt-link to="/"
-        ><img class="logo" src="../assets/images/images.jpg" alt="logo"
-      /></nuxt-link>
-
-      <!-- Logout Button -->
+        </div>
+      </v-container>
     </v-app-bar>
-  </v-app>
+    <!-- <v-navigation-drawer v-model="drawer" color="red"></v-navigation-drawer> -->
+    <v-navigation-drawer v-model="drawer" location="bottom" temporary>
+      <div class="d-flex flex-column">
+        <nuxt-link class="linkdrawer" style="color: black" to="Sign-in">
+          <v-btn rounded="xl" v-if="smAndDown" class="login" depressed>
+            <i class="fa-regular fa-right-to-bracket"></i>
+            <v-icon icon="mdi-chevron-left"></v-icon>
+            تسجيل الدخول
+          </v-btn>
+        </nuxt-link>
+        <nuxt-link class="linkdrawer" to="/">الرئيسية</nuxt-link>
+        <nuxt-link class="linkdrawer" to="profile">الملف الشخصي</nuxt-link>
+        <nuxt-link class="linkdrawer" to="contactus">المهارات</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/">المدونة</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/">تواصل معنا</nuxt-link>
+
+      </div>
+    </v-navigation-drawer>
+  </v-layout>
 </template>
 
-<script>
-export default defineComponent({});
-</script>
-<style scoped>
+
+
+<style scoped lang="scss">
 .link {
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
-  color: black;
+  color: #393737de;
   margin-right: 5px;
   padding: 3px;
+  line-height: 1.5;
 }
 .navbar {
   height: 64px !important;
-}
-
-.link:active,
-.link:focus,
-.link:hover {
-  color: blue;
 }
 .navbar {
   height: 64px;
@@ -59,60 +82,37 @@ export default defineComponent({});
   justify-content: center;
   background-color: rgba(221, 221, 221, 0.303);
 }
-.logo {
-  width: 50px;
+.login {
+  line-height: 1.5;
+}
+.photoprofile {
+  margin-top: 5px;
+}
+.linkdrawer {
+  padding: 15px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  &:hover {
+    background: rgb(226, 226, 226);
+    color: #55c57a;
+    transition: 0.3s;
+  }
 }
 </style>
+<script setup>
+import { watch, ref } from "vue";
+import { useDisplay } from "vuetify";
 
-<!-- <v-row>
-  <v-col cols="2">
-    <v-btn depressed color="red">
-      <i class="fal fa-sign-in me-3" />
-      <v-icon icon="mdi-chevron-left"></v-icon>
-      login
-  </v-btn>
-  </v-col>
-  <v-col cols="3">
-    <nuxt-link to="/">تواصل معنا</nuxt-link>
-    <nuxt-link to="/Skills">تصفح المهارات</nuxt-link>
-    <nuxt-link to="/contact">من نحن</nuxt-link>
-  </v-col>
+// Destructure only the keys you want to use
+const { smAndDown } = useDisplay();
+console.log(useDisplay);
 
-</v-row>
-
-<v-toolbar-title class="d-flex justify-end">
-  <img src="../assets/images/Untitled-1.png" alt="Logo" height="50" />
-</v-toolbar-title> -->
-<!--
-
-<nav>
-  <div class="navbar">
-    <v-container>
-      <v-row>
-        <v-col class="d-flex" cols="5">
-          <ul>
-            <li>
-              <v-btn depressed>
-                <i class="fal fa-sign-in me-3" />
-                <v-icon icon="mdi-chevron-left"></v-icon>
-                تسجيل الدخول
-              </v-btn>
-            </li>
-            <li>
-              <nuxt-link class="link ll" to="/Skills">
-                تصفح المهارات</nuxt-link
-              >
-            </li>
-            <li><nuxt-link class="link" to="/">تواصل معنا </nuxt-link></li>
-          </ul>
-        </v-col>
-        <v-col cols="5"></v-col>
-        <v-col cols="2">
-          <nuxt-link to="/">
-            <img src="../assets/images/images.jpg" alt="Logo" height="50" />
-          </nuxt-link>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
-</nav> -->
+const drawer = ref(false);
+const group = ref(null);
+watch(group, () => {
+  drawer.value = false;
+});
+</script>

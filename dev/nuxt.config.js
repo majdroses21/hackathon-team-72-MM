@@ -17,6 +17,13 @@ export default defineNuxtConfig({
     }
   ],
   css: ["vuetify/styles/main.sass", "@mdi/font/css/materialdesignicons.css"],
+  buildModules:['@nuxtjs/fontawesome'],
+  fontawesome: {
+    icons:{
+     solid:true,
+     brands:true
+    }
+   },
   build: {
     transpile: ["vuetify"],
   },

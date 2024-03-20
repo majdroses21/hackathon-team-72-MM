@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtLayout>
-      
+
     </NuxtLayout>
   </div>
   <NuxtPage />
@@ -12,5 +12,4 @@ body {
   box-sizing: border-box;
   /* height: 3000000px; */
 }
-
 </style>
