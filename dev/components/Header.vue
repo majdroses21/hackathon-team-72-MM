@@ -1,32 +1,42 @@
 <template>
   <div class="header">
-    <div class="desc">
-      <p class=" text-center text-h4 font-bold">
-        التعلم ليس مجرد اكتساب معرفة، بل هو رحلة مستمرة نحو التحول والتطور.
-        فلنتحفز دائمًا لنتعلم ونتبادل الخبرات، ففي هذا الاستمرار تكمن قوتنا
-        وتحقيق إنجازاتنا.
-      </p>
-    </div>
 
-    <div class="search">
-      <input
-        placeholder="ماذا تريد ان تتعلم اليوم"
-        type="search"
-        name=""
-        id=""
-      />
-      <v-btn class="btnsearch" rounded>بحــث</v-btn>
-    </div>
+    <v-container>
+      <v-row>
+        <v-col class="text-center" cols="12" lg="6">
+          <div class="desc">
+            <p class="ph text-center text-h4 font-bold hidden-xs-only">
+              التعلم ليس مجرد اكتساب معرفة، بل هو رحلة مستمرة نحو التحول والتطور.
+              فلنتحفز دائمًا لنتعلم ونتبادل الخبرات، ففي هذا الاستمرار تكمن قوتنا
+              وتحقيق إنجازاتنا.
+            </p>
+          </div>
+
+          <div class="search">
+            <input
+            dir="rtl"
+              placeholder="ماذا تريد ان تتعلم اليوم"
+              type="search"
+              name=""
+              id=""
+            />
+            <v-btn class="btnsearch" rounded>بحــث</v-btn>
+          </div>
+        </v-col>
+      </v-row>
+
+  </v-container>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .header {
   background-image: url(../assets/images/male-hand-holding-question-mark-icon-neon-redbluepurple-backgroundbanner-with-copy-space-place-text_150455-21042.avif);
   background-size: cover;
   height: 70vh;
   width: 100%;
   position: relative;
+  margin-top: 64px;
 }
 @media (max-width: 776px) {
     .header {
@@ -36,16 +46,20 @@
     }
     .desc {
         width: 80% !important;
-        font-size: 28px;
         top:30px !important;
         width: 90%;
         text-align: center!important;
     }
     .search {
         width: 80% !important;
-        margin-left: 5%;
-        text-align: center!important;
     }
+
+     .ph{
+      font-size: 22px !important;
+      margin-top: 7%;
+      line-height:1.4 !important;
+      font-weight: bold;
+     }
 }
 @media (min-width:778px) and (max-width:992px) {
     .header {
@@ -62,6 +76,10 @@
         width: 80% !important;
 
     }
+    .ph{
+      line-height: 1.5 !important;
+      font-weight: bold;
+     }
 
 }
 .desc {
@@ -91,12 +109,17 @@
  }
 }
 .btnsearch {
+
   position: absolute;
-  right: 9px;
+  left:10px ;
   height: 50px;
   top: 10px;
   font-size: 25px;
+
 }
+
+
+
 </style>
 
 <script>
