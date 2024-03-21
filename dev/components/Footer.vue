@@ -78,6 +78,7 @@
   background-size: cover;
   height: 50vh;
   box-shadow: 2px black;
+  box-shadow: 0 5px 40px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 .head div {
   width: 25%;
