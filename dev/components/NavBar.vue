@@ -27,7 +27,7 @@
           >
         </v-btn>
         <v-btn rounded="xl">
-          <nuxt-link v-if="!smAndDown" class="link" to="/Skills"
+          <nuxt-link v-if="!smAndDown" class="link" to="Skills"
             >تصفح المهارات</nuxt-link
           >
         </v-btn>
@@ -116,3 +116,4 @@ watch(group, () => {
   drawer.value = false;
 });
 </script>
+

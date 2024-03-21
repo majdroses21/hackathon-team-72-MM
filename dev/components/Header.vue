@@ -111,14 +111,13 @@
  }
 }
 .btnsearch {
-
   position: absolute;
   left:10px ;
   right: 20px;
   height: 50px;
   top: 17px;
   font-size: 25px;
-
+  width: 20px;
 }
 
 
