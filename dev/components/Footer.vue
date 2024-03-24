@@ -21,7 +21,12 @@
           <v-col cols="6" md="3">
             <div class="aboutUs d-sm-block">
               <h5 class="line text-h4 mb-6">معلومات عنا</h5>
-              <h5>sgfdgsfdg</h5>
+              <nuxt-link class="link footer__link" to="aboutus"
+              >من نحن ؟</nuxt-link
+            >
+            <nuxt-link class="link footer__link" to="ourgoals"
+              >أهداف المنصة</nuxt-link
+            >
             </div>
           </v-col>
 
@@ -34,6 +39,7 @@
               <nuxt-link class="link footer__link" to="contactus"
                 >تواصل معنا</nuxt-link
               >
+
             </div>
           </v-col>
 
@@ -41,8 +47,8 @@
             <div class="us">
               <img src="../assets/images/logo1.png" alt="Logo" />
               <p class="text-h5">
-                تسعي المنصة جاهدة لتقديم التعلم وتبادل وتعزيز الخبرات في العالم
-                العربي
+                 تسعي المنصة جاهدة لتقديم التعلم وتبادل وتعزيز الخبرات في  العالم العربي
+                نسعى لجعل المعرفة والخبرات متاحة للجميع ونشجع التعليم المستمر
               </p>
             </div>
           </v-col>
@@ -74,7 +80,7 @@
 }
 
 .footer {
-  background-image: url("../assets/images/colorful-pencils-concept-with-copy-space_23-2148812400.jpg");
+  background-image: url("../assets/images/footer.jpg");
   background-size: cover;
   height: 50vh;
   box-shadow: 2px black;
@@ -116,9 +122,10 @@
 }
 .footer__link:hover,
 .footer__link:active {
-  color: #55c57a;
+  color: #6c5ce7;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
-  transform: rotate(5deg) scale(1.3);
+  transform: rotate(5deg) scale(1.1);
+  border-radius: 9px;
 }
 </style>
 <script setup>

@@ -13,8 +13,10 @@
     "@mdi/font": "^7.4.47",
     "@nuxtjs/fontawesome": "^1.1.2",
     "nuxt": "^3.11.0",
+    "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue-sonner": "^1.1.2"
   },
   "devDependencies": {
     "sass": "^1.72.0",

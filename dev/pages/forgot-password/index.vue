@@ -11,7 +11,7 @@
         <form class="mt-10">
           <fieldset class="grid gap-5">
             <v-text-field
-              label="Email *"
+              label="البريد الإلكتروني *"
               placeholder="Mohazem@example.com"
               type="email"
             ></v-text-field>

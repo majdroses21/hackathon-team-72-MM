@@ -11,7 +11,7 @@
       <form @submit="submit" class="mt-10">
         <fieldset class="grid gap-5">
           <v-text-field
-            label="Email *"
+            label="البريد الإلكتروني *"
             placeholder="Mohazem@example.com"
             type="email"
             :rules="[rules.required, rules.email]"
@@ -19,7 +19,7 @@
           ></v-text-field>
           <v-text-field
             class="pass"
-            label="Password *"
+            label="الرقم السري *"
             :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
             :type="showPassword ? 'text' : 'password'"
             @click:append="toggleShowPassword"
@@ -59,11 +59,13 @@
 
 <style scoped lang="scss">
 .overlay {
-  background-image: url(../../assets/images/llll.png);
+  background-image: url(../../assets/images/workplace-with-blue-office-supplies_23-2147843328.jpg);
   background-size: cover;
   background-position: 50%;
   height: 100vh;
   width: 100%;
+  padding-top: 64px;
+  margin-bottom: 150px;
 }
 
 .form {
@@ -99,15 +101,6 @@
   position: absolute;
   left: -8px;
   top: 12px;
-}
-
-.register {
-  margin-top: 64px;
-}
-.mdi-eye::before {
-  content: "\F0208";
-  position: absolute;
-  left: -50px;
 }
 .forgetpass {
   color: rgb(2 121 255) !important;

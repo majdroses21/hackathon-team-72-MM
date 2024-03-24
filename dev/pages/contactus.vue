@@ -35,10 +35,10 @@
 
 
 </template>
-<style lang="scss">
+<style scoped lang="scss">
 .contact {
   height: 60vh;
-  margin-top: 64px;
+  padding-top: 64px;
 }
 .btn {
   position: absolute;
@@ -65,6 +65,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 .cover img {
   background-size: cover;
