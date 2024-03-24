@@ -8,39 +8,57 @@
             Start teaching and learning science from experts in the Arab world!
           </p>
         </div>
-        <form class="mt-10">
+        <v-form
+          class="mt-10"
+          @submit.prevent="registerHandler"
+          ref="regFormRef"
+        >
           <fieldset class="grid gap-5">
             <v-text-field
-              label="Full name *"
-              placeholder="Mohamed Hazem"
-              type="email"
-              :rules="[rules.required]"
+              :rules="[rules.email]"
               required
+              v-model="email"
+              label="البريد الإلكتروني"
             ></v-text-field>
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  :rules="[rules.required]"
+                  required
+                  v-model="firstName"
+                  label="الاسم الأول"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-text-field
+                  :rules="[rules.required]"
+                  required
+                  v-model="lastName"
+                  label="الاسم الأخير"
+                ></v-text-field>
+              </v-col>
+            </v-row>
             <v-text-field
-              label="Email *"
-              placeholder="Mohazem@example.com"
-              type="email"
-              :rules="[rules.required, rules.email]"
-              required
-            ></v-text-field>
-            <v-text-field
-              label="Password *"
-              type="password"
+              class="pass"
+              label="الرقم السري *"
+              v-model="password"
               :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-          :type="showPassword ? 'text' : 'password'"
-          @click:append="toggleShowPassword"
+              :type="showPassword ? 'text' : 'password'"
+              @click:append="toggleShowPassword"
+              type="password"
               :rules="[rules.required, rules.minLength]"
               required
             ></v-text-field>
+            <br />
+            <label for="birthday">Birthday:</label>
+            <input
+              v-model="birthday"
+              type="date"
+              id="birthday"
+              name="birthday"
+            /><br /><br />
+
             <div class="pl-3 pr-3 d-flex flex-column ga-2">
-              <p>
-                <NuxtLink
-                  class="text-sm font-semibold text-primary forgetpass"
-                  to="/forgot-password"
-                  >forgot password?</NuxtLink
-                >
-              </p>
               <v-btn type="submit" class="w-fill">Create account </v-btn>
               <div class="or">or</div>
               <v-btn class="w-full" outlined>
@@ -48,7 +66,7 @@
               </v-btn>
             </div>
           </fieldset>
-        </form>
+        </v-form>
         <p class="mt-10 text-center text-sm">
           Already have an account?
           <NuxtLink
@@ -69,6 +87,7 @@
   background-position: 50%;
   height: 100vh;
   width: 100%;
+  margin-bottom: 150px;
 }
 .form {
   width: 40%;
@@ -121,11 +140,51 @@
 </style>
 
 <script setup>
+definePageMeta({
+  middleware: "guest",
+});
+
 import { ref } from "vue";
-const name = ref("");
+const nuxtApp = useNuxtApp();
 const email = ref("");
+const firstName = ref("");
+const lastName = ref("");
 const password = ref("");
+const birthday = ref("");
 const showPassword = ref(false);
+let registerErrors = ref(null);
+let registerLoading = ref(false);
+let regFormRef = ref(null);
+let isLogged = useState("loggedIn", () => false);
+
+const registerHandler = async () => {
+  console.log("regFormRef = ", regFormRef);
+  const { valid } = await regFormRef.value.validate();
+  if (!valid) return;
+  registerLoading = true;
+  try {
+    // const registerRes = await $axios.post('auth/register', {
+    //   email,
+    //   password
+    // })
+
+    // redirect to dashboard
+
+    // Request end and success
+    isLogged.value = true;
+
+    navigateTo("/dashboard");
+
+    useSonner.success("Account successfully created");
+  } catch (error) {
+    // Request end and failed
+    // registerErrors = error.response.message
+    useSonner.error("Pet updated successfully");
+  } finally {
+    // Request end
+    registerLoading = false;
+  }
+};
 
 const toggleShowPassword = () => {
   showPassword.value = !showPassword.value;

@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-app-bar elevation="3">
+    <v-app-bar class="fo" color="#6c5ce7" elevation="3">
       <v-container class="d-flex flex-row">
         <!-- <v-app-bar-nav-icon v-if="!smAndDown"></v-app-bar-nav-icon> -->
         <v-app-bar-nav-icon
@@ -21,20 +21,19 @@
             تسجيل الدخول
           </v-btn>
         </nuxt-link>
-        <v-btn rounded="xl">
+        <v-btn rounded="xl" class="login">
           <nuxt-link v-if="!smAndDown" class="link" to="contactus"
             >تواصل معنا</nuxt-link
           >
         </v-btn>
-        <v-btn rounded="xl">
-          <nuxt-link v-if="!smAndDown" class="link" to="Skills"
+        <v-btn rounded="xl" class="login"><nuxt-link v-if="!smAndDown" class="link" to="Skills"
             >تصفح المهارات</nuxt-link
           >
         </v-btn>
         <v-spacer></v-spacer>
         <div class="logo">
           <nuxt-link to="/">
-            <h1>fhrth</h1>
+            <h1 class="ds">fhrth</h1>
           </nuxt-link>
 
         </div>
@@ -44,9 +43,9 @@
     <v-navigation-drawer v-model="drawer" location="bottom" temporary>
       <div class="d-flex flex-column">
         <nuxt-link class="linkdrawer" style="color: black" to="Sign-in">
-          <v-btn rounded="xl" v-if="smAndDown" class="login" depressed>
+          <v-btn color="red" rounded="xl" v-if="smAndDown" class="login" depressed>
             <i class="fa-regular fa-right-to-bracket"></i>
-            <v-icon icon="mdi-chevron-left"></v-icon>
+            <v-icon icon="mdi-account"></v-icon>
             تسجيل الدخول
           </v-btn>
         </nuxt-link>
@@ -68,25 +67,24 @@
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
-  color: #393737de;
+  color: white;
   margin-right: 5px;
   padding: 3px;
   line-height: 1.5;
 }
-.navbar {
-  height: 64px !important;
-}
-.navbar {
-  height: 64px;
-  display: flex;
-  justify-content: center;
-  background-color: rgba(221, 221, 221, 0.303);
+.ds {
+  color: white;
 }
 .login {
   line-height: 1.5;
+  color: white;
+  margin-top: 5px !important
 }
 .photoprofile {
   margin-top: 5px;
+}
+.logo {
+  color: white;
 }
 .linkdrawer {
   padding: 15px;
@@ -97,7 +95,7 @@
   text-align: center;
   &:hover {
     background: rgb(226, 226, 226);
-    color: #55c57a;
+    color: #6c5ce7;
     transition: 0.3s;
   }
 }
