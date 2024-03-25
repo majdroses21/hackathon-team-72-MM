@@ -1,0 +1,12 @@
+/* 
+<script setup>
+import { useHead } from '@nuxtjs/composition-api';
+
+useHead({
+  link: [
+    { rel: 'stylesheet', href: '../assets/css/main.css' }
+  ]
+})
+
+</script>
+*/

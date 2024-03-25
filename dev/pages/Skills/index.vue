@@ -1,5 +1,5 @@
 <template>
-    <v-container class="text-center">
+    <v-container class="text-center mt-12">
         <h1>أختر المجال الذي تدرسة ثم اختر المهارة</h1>
         <h3>غطي احتياجاتك من المهارات في جميع التخصصات</h3>
     </v-container>
