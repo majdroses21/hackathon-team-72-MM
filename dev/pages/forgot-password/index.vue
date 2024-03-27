@@ -8,7 +8,7 @@
             Let us help you sign in your account
           </p>
         </div>
-        <form class="mt-10">
+        <v-form class="mt-10">
           <fieldset class="grid gap-5">
             <v-text-field
               label="البريد الإلكتروني *"
@@ -25,7 +25,7 @@
               </v-btn>
             </div>
           </fieldset>
-        </form>
+        </v-form>
         <p class="mt-10 text-center text-sm">
           Already have an account?
           <NuxtLink
@@ -100,4 +100,14 @@
 }
 </style>
 
-<script></script>
+<script setup>
+
+const sendemail = async() => {
+  try {
+
+  } catch (error) {
+
+  }
+}
+
+</script>
