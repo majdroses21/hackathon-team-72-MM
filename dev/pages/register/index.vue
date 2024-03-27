@@ -6,6 +6,7 @@
           <h1 class="text-3xl font-semibold lg:text-4xl">Create account</h1>
           <p class="mt-2 text-lg text-muted-foreground">
             Start teaching and learning science from experts in the Arab world!
+            {{ foo }}
           </p>
         </div>
         <v-form
@@ -145,6 +146,7 @@ definePageMeta({
 });
 
 import { ref } from "vue";
+import api from "~/composables/api"
 const nuxtApp = useNuxtApp();
 const email = ref("");
 const firstName = ref("");
@@ -156,30 +158,38 @@ let registerErrors = ref(null);
 let registerLoading = ref(false);
 let regFormRef = ref(null);
 let isLogged = useState("loggedIn", () => false);
-
+const token = useState('token', () => null);
 const registerHandler = async () => {
   console.log("regFormRef = ", regFormRef);
   const { valid } = await regFormRef.value.validate();
   if (!valid) return;
   registerLoading = true;
   try {
-    // const registerRes = await $axios.post('auth/register', {
-    //   email,
-    //   password
-    // })
+    const registerRes = await api('/auth/register', {
+      method: 'POST',
+      name: firstName + '' + lastName,
+      email: email,
+      password: password
+    })
 
-    // redirect to dashboard
-
-    // Request end and success
+    const loginRes = await api('/auth/login', {
+      query: {
+        email,
+        password
+      }
+    })
+    token.value = loginRes.data.access_token;
     isLogged.value = true;
 
+    console.log('registerRes = ', registerRes)
+    // redirect to dashboard
     navigateTo("/dashboard");
-
     useSonner.success("Account successfully created");
   } catch (error) {
     // Request end and failed
     // registerErrors = error.response.message
-    useSonner.error("Pet updated successfully");
+    console.error('error = ', error)
+    useSonner.error("Error: ", error.response.message);
   } finally {
     // Request end
     registerLoading = false;

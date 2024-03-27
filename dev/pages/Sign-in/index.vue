@@ -8,7 +8,7 @@
           Welcom back! Enter your details to get started.
         </p>
       </div>
-      <form @submit="submit" class="mt-10">
+      <v-form @submit.prevent="submitForm" class="mt-10">
         <fieldset class="grid gap-5">
           <v-text-field
             label="البريد الإلكتروني *"
@@ -43,7 +43,7 @@
             </v-btn>
           </div>
         </fieldset>
-      </form>
+      </v-form>
       <p class="mt-10 text-center text-sm">
         Don't have an account?
         <NuxtLink
@@ -119,10 +119,13 @@
 
 <script setup>
 import { ref } from "vue";
+import api from "~/composables/api"
 const name = ref('');
 const email = ref('');
 const password = ref("");
 const showPassword = ref(false);
+const loggedIn = useState('loggedIn', ()=>false)
+const token = useState('token', ()=>null)
 
 const toggleShowPassword = () => {
   showPassword.value = !showPassword.value;
@@ -134,11 +137,27 @@ const rules = {
   email: (value) => /.+@.+\..+/.test(value) || 'Invalid email address'
 };
 
-const submitForm = () => {
-  if ($v.name.$invalid || $v.email.$invalid || $v.password.$invalid) {
-    // Handle form validation errors
-    return;
-  }
+const submitForm = async() => {
+
   // Submit form logic
+  try {
+    const loginRes = await api('/api/login', {
+      query: {
+        email,
+        password
+      }
+    })
+    console.log('loginRes = ', loginRes)
+    if(loginRes.status){
+      // login success
+      loggedIn.value = true
+      token.value = loginRes.access_token
+
+      navigateTo("/dashboard");
+    }
+    // throw 'UNEXPRECTED ERROR'
+  } catch (error) {
+    useSonner.error("Error: ", error.response.message);
+  }
 };
 </script>
