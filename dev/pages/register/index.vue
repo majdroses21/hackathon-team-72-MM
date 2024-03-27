@@ -182,13 +182,8 @@ const registerHandler = async () => {
     isLogged.value = true;
 
     console.log('registerRes = ', registerRes)
-
     // redirect to dashboard
-
-    // Request end and success
-
     navigateTo("/dashboard");
-
     useSonner.success("Account successfully created");
   } catch (error) {
     // Request end and failed

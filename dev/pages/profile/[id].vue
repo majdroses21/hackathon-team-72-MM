@@ -22,7 +22,7 @@
         <div class="content-container d-noneX">
             <div class="content" dir="rtl">
                 <label> اكتب توضيح ماذا تريد تعلم في <span>JavaScript </span> للإجتماع مع <span>Majd</span></label>
-                <v-textarea label="Type your messege here"></v-textarea>
+                <v-textarea label="Type your messege here" dir="auto"></v-textarea>
                 <v-btn class="text-none mb-4" color="black" size="large" variant="flat">
                     Connect
                 </v-btn>
@@ -62,7 +62,7 @@
     position: relative;
     width: 200px;
     height: 200px;
-    bottom: 80px;
+    bottom: 110px;
     left: 25px;
 }
 

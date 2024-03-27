@@ -9,10 +9,7 @@
           @click.stop="drawer = !drawer"
         ></v-app-bar-nav-icon>
         <v-avatar class="photoprofile" v-if="!smAndDown">
-          <v-img
-            alt="John"
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-          ></v-img>
+          <!-- <v-img alt="John" src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img> -->
         </v-avatar>
         <nuxt-link style="color: black" to="Sign-in">
           <v-btn rounded="xl" v-if="!smAndDown" class="login" depressed>
