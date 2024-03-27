@@ -102,9 +102,9 @@
   padding: 20px;
 }
 .search  input {
-  width: 80% ;
+  width: 75% ;
   height: 40px;
-  margin-right: 20%;
+  margin-right: -10%;
   border: none;
   &:focus {
    outline: 0;
