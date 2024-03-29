@@ -3,15 +3,15 @@
         <v-fade-transition mode="out-in">
             <v-row>
                 <v-col>
-                    <div class="cover-container">
-                        <v-img class="bg-grey-lighten-2" height="225" src="/images/cov.jpg" cover></v-img>
+                    <div class="cover-container ">
+                        <v-img class="bg-grey-lighten-2" height="225" :src="userProfile.coverImg" cover></v-img>
                         <div class="user-info">
-                            <span class="userName">Majd Ahmed</span>
-                            <v-rating :model-value="3.5" color="amber" density="compact" size="x-large" half-increments
+                            <span class="userName">{{ userProfile.name }}</span>
+                            <v-rating :model-value="4" color="amber" density="compact" size="x-large" half-increments
                                 readonly></v-rating>
                         </div>
                         <div class="img-container">
-                            <v-img class="prof-img" cover src="/images/majd.jpg"></v-img>
+                            <v-img class="prof-img" cover :src="userProfile.img"></v-img>
                         </div>
                     </div>
                 </v-col>
@@ -21,7 +21,7 @@
 
         <div class="content-container d-noneX">
             <div class="content" dir="rtl">
-                <label> اكتب توضيح ماذا تريد تعلم في <span>JavaScript </span> للإجتماع مع <span>Majd</span></label>
+                <label> اكتب توضيح ماذا تريد تعلم  للإجتماع مع <span>{{ userProfile.name }}</span></label>
                 <v-textarea label="Type your messege here" dir="auto"></v-textarea>
                 <v-btn class="text-none mb-4" color="black" size="large" variant="flat">
                     Connect
@@ -55,6 +55,27 @@
     </v-container>
 </template>
 
+
+<script setup>
+
+const { id } = useRoute().params;
+const url = `http://127.0.0.1:8000/api/user/${id}/profile`;
+
+import { ref  } from "vue";
+const userProfile = ref([]);
+const getUser = async () => {
+    await fetch(`http://127.0.0.1:8000/api/user/${id}/profile`)
+    .then((res) => res.json())
+    .then((data) => userProfile.value = data.data)
+    .catch((err) => {});
+}
+
+
+onMounted(async() => {
+    await getUser();
+})
+
+</script>
 
 <style scoped>
 /* Cover & profile Photos */
