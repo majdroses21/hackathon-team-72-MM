@@ -16,8 +16,6 @@
             </h1>
             <v-row>
                 <v-col cols="12" md="6" class="d-flex align-center px-0 mb-3 mb-md-0 px-md-4 px-2">
-                    <!-- <v-img class="align-end text-white" height="200" src="/images/code.jpg" cover></v-img> -->
-                    <!-- <v-img class="align-end text-white" height="200" src="../assets/images/howwork1.jpg" cover></v-img> -->
                     <img class="howimg w-100" src="../assets/images/howwork1.jpg"  alt="">
                 </v-col>
                 <v-col dir="rtl" cols="12" md="6" class="px-2 px-md-4">
@@ -56,7 +54,7 @@
                                 <h2 class="textdark--text font-weight-medium">التواصل </h2>
                             </span>
                             <p class="mt-3 textmuted--text p-0 m-0">
-                                يمكنك التواصل مع الشخص الذي يمتلك المهاره عن طريف بريد الكتروني
+                                يمكنك التواصل مع الشخص الذي يمتلك المهاره عن طريق بريد الكتروني
                             </p>
                         </div>
                     </div>
@@ -117,7 +115,7 @@ export default {
   padding: 20px;
   box-shadow: 0 5px 40px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   &.active {
-    background: #6c5ce7 !important;
+    background: #c43cea !important;
     .textmuted--text {
       color: #fff !important;
       opacity: 0.9;
