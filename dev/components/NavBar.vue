@@ -1,6 +1,7 @@
 <template>
   <v-layout>
-    <v-app-bar class="fo" color="#6c5ce7" elevation="3">
+    <v-app-bar class="fo" color="#862991
+    " elevation="3">
       <v-container class="d-flex flex-row">
         <!-- <v-app-bar-nav-icon v-if="!smAndDown"></v-app-bar-nav-icon> -->
         <v-app-bar-nav-icon
@@ -8,8 +9,8 @@
           variant="text"
           @click.stop="drawer = !drawer"
         ></v-app-bar-nav-icon>
-        <v-avatar class="photoprofile" v-if="!smAndDown">
-          <!-- <v-img alt="John" src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img> -->
+        <v-avatar  class="photoprofile" v-if="!smAndDown && isLogged">
+          <v-img alt="John" src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img>
         </v-avatar>
         <nuxt-link style="color: black" to="Sign-in">
           <v-btn rounded="xl" v-if="!smAndDown" class="login" depressed>
@@ -30,7 +31,8 @@
         <v-spacer></v-spacer>
         <div class="logo">
           <nuxt-link to="/">
-            <h1 class="ds">fhrth</h1>
+            <!-- <h1 class="ds">fhrth</h1> -->
+            <img src="../assets/images/LogoNav.png" alt="">
           </nuxt-link>
 
         </div>
@@ -40,7 +42,7 @@
     <v-navigation-drawer v-model="drawer" location="bottom" temporary>
       <div class="d-flex flex-column">
         <nuxt-link class="linkdrawer" style="color: black" to="Sign-in">
-          <v-btn color="red" rounded="xl" v-if="smAndDown" class="login" depressed>
+          <v-btn color="#6c5ce7" rounded="xl" v-if="smAndDown" class="login" depressed>
             <i class="fa-regular fa-right-to-bracket"></i>
             <v-icon icon="mdi-account"></v-icon>
             تسجيل الدخول
@@ -83,6 +85,9 @@
 .logo {
   color: white;
 }
+.logo img {
+  width: 155px;
+}
 .linkdrawer {
   padding: 15px;
   text-decoration: none;
@@ -100,6 +105,7 @@
 <script setup>
 import { watch, ref } from "vue";
 import { useDisplay } from "vuetify";
+let isLogged = useState("loggedIn", () => false);
 
 // Destructure only the keys you want to use
 const { smAndDown } = useDisplay();

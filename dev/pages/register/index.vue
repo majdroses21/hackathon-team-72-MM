@@ -16,6 +16,7 @@
         >
           <fieldset class="grid gap-5">
             <v-text-field
+            :looding="true"
               :rules="[rules.email]"
               required
               v-model="email"
@@ -159,12 +160,15 @@ let registerLoading = ref(false);
 let regFormRef = ref(null);
 let isLogged = useState("loggedIn", () => false);
 const token = useState('token', () => null);
+
+
 const registerHandler = async () => {
   console.log("regFormRef = ", regFormRef);
   const { valid } = await regFormRef.value.validate();
   if (!valid) return;
   registerLoading = true;
   try {
+
     const registerRes = await api('/auth/register', {
       method: 'POST',
       name: firstName + '' + lastName,
@@ -189,12 +193,13 @@ const registerHandler = async () => {
     // Request end and failed
     // registerErrors = error.response.message
     console.error('error = ', error)
-    useSonner.error("Error: ", error.response.message);
+    useSonner.error(error.message);
   } finally {
     // Request end
     registerLoading = false;
   }
 };
+
 
 const toggleShowPassword = () => {
   showPassword.value = !showPassword.value;
@@ -207,11 +212,13 @@ const rules = {
   email: (value) => /.+@.+\..+/.test(value) || "Invalid email address",
 };
 
-const submitForm = () => {
-  if ($v.name.$invalid || $v.email.$invalid || $v.password.$invalid) {
-    // Handle form validation errors
-    return;
-  }
-  // Submit form logic
-};
+// const submitForm = () => {
+//   if ($v.name.$invalid || $v.email.$invalid || $v.password.$invalid) {
+//     // Handle form validation errors
+//     return;
+//   }
+//   // Submit form logic
+// };
 </script>
+
+

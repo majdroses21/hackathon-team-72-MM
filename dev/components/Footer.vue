@@ -27,6 +27,9 @@
             <nuxt-link class="link footer__link" to="ourgoals"
               >أهداف المنصة</nuxt-link
             >
+            <nuxt-link class="link footer__link" to="howitwork"
+              >كيف تعمل المنصه</nuxt-link
+            >
             </div>
           </v-col>
 
@@ -45,7 +48,7 @@
 
           <v-col cols="6" md="3">
             <div class="us">
-              <img src="../assets/images/logo1.png" alt="Logo" />
+              <img src="../assets/images/logo.png" alt="Logo" />
               <p class="text-h5">
                  تسعي المنصة جاهدة لتقديم التعلم وتبادل وتعزيز الخبرات في  العالم العربي
                 نسعى لجعل المعرفة والخبرات متاحة للجميع ونشجع التعليم المستمر
@@ -72,15 +75,17 @@
 </template>
 <style>
 .us img {
-  width: 50%;
-  height: 50px;
+  width: 65px;
+  height: 65px;
 }
+
 .apps img {
   display: block;
 }
 
 .footer {
   background-image: url("../assets/images/footer.jpg");
+
   background-size: cover;
   height: 50vh;
   box-shadow: 2px black;
