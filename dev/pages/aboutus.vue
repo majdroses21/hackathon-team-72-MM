@@ -71,7 +71,7 @@
 .cover {
   height: 56vh;
   position: relative;
-  background-image: url(../assets/images/download.avif);
+  background-image: url(../assets/images/webinar-elearning-training-business-internet_218381-10594.jpg);
   width: 100%;
   background-position: 50%;
   background-repeat: no-repeat;

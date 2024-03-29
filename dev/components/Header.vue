@@ -20,7 +20,7 @@
               name=""
               id=""
             />
-            <v-btn class="btnsearch" rounded>بحــث</v-btn>
+            <v-btn color="#d955ff" class="btnsearch" rounded>بحــث</v-btn>
           </div>
         </v-col>
       </v-row>
