@@ -12,7 +12,7 @@
         <v-avatar  class="photoprofile" v-if="!smAndDown && isLogged">
           <v-img alt="John" src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img>
         </v-avatar>
-        <nuxt-link style="color: black" to="Sign-in">
+        <nuxt-link style="color: black" to="/Sign-in">
           <v-btn rounded="xl" v-if="!smAndDown" class="login" depressed>
             <i class="fa-regular fa-right-to-bracket"></i>
             <v-icon icon="mdi-chevron-left"></v-icon>
@@ -20,11 +20,11 @@
           </v-btn>
         </nuxt-link>
         <v-btn rounded="xl" class="login">
-          <nuxt-link v-if="!smAndDown" class="link" to="contactus"
+          <nuxt-link v-if="!smAndDown" class="link" to="/contactus"
             >تواصل معنا</nuxt-link
           >
         </v-btn>
-        <v-btn rounded="xl" class="login"><nuxt-link v-if="!smAndDown" class="link" to="Skills"
+        <v-btn rounded="xl" class="login"><nuxt-link v-if="!smAndDown" class="link" to="/Skills"
             >تصفح المهارات</nuxt-link
           >
         </v-btn>
@@ -41,7 +41,11 @@
     <!-- <v-navigation-drawer v-model="drawer" color="red"></v-navigation-drawer> -->
     <v-navigation-drawer v-model="drawer" location="bottom" temporary>
       <div class="d-flex flex-column">
-        <nuxt-link class="linkdrawer" style="color: black" to="Sign-in">
+
+        <nuxt-link class="linkdrawer" style="color: black" to="/Sign-in">
+
+        
+
           <v-btn color="#6c5ce7" rounded="xl" v-if="smAndDown" class="login" depressed>
             <i class="fa-regular fa-right-to-bracket"></i>
             <v-icon icon="mdi-account"></v-icon>
@@ -49,8 +53,8 @@
           </v-btn>
         </nuxt-link>
         <nuxt-link class="linkdrawer" to="/">الرئيسية</nuxt-link>
-        <nuxt-link class="linkdrawer" to="profile">الملف الشخصي</nuxt-link>
-        <nuxt-link class="linkdrawer" to="contactus">المهارات</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/profile">الملف الشخصي</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/contactus">المهارات</nuxt-link>
         <nuxt-link class="linkdrawer" to="/">المدونة</nuxt-link>
         <nuxt-link class="linkdrawer" to="/">تواصل معنا</nuxt-link>
 
