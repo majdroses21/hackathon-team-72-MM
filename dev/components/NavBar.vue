@@ -41,7 +41,11 @@
     <!-- <v-navigation-drawer v-model="drawer" color="red"></v-navigation-drawer> -->
     <v-navigation-drawer v-model="drawer" location="bottom" temporary>
       <div class="d-flex flex-column">
+
         <nuxt-link class="linkdrawer" style="color: black" to="/Sign-in">
+
+        
+
           <v-btn color="#6c5ce7" rounded="xl" v-if="smAndDown" class="login" depressed>
             <i class="fa-regular fa-right-to-bracket"></i>
             <v-icon icon="mdi-account"></v-icon>

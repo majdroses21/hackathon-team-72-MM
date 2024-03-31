@@ -17,11 +17,10 @@
         </v-row>
     </v-container>
     
-    <v-pagination v-model="page" length="2" @update:model-value="getAllMinSkills" color="purple" elevation="4"></v-pagination>
+    <v-pagination v-model="page" :length="totalPages" @update:model-value="getAllMinSkills" color="purple" elevation="4"></v-pagination>
 </template>
 
 <script setup>
-console.log("heloo 777");
 import { ref , onMounted } from 'vue';
 const allMinSkills =  ref([]);
 const page = ref(1);
@@ -33,9 +32,16 @@ const getAllMinSkills = async ()=>{
     .then((data)=> allMinSkills.value = data.data.data)
     .catch(()=>{})
 }
-
+const totalPages = ref('');
+const getTotalPages = async ()=>{
+    await fetch(`http://127.0.0.1:8000/api/topic`)
+    .then((res)=> res.json())
+    .then((data)=> totalPages.value = data.totalPage)
+    .catch(()=>{})
+}
 onMounted(() => {
     getAllMinSkills();
+    getTotalPages();
 })
 
 </script>
