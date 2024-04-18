@@ -21,28 +21,27 @@
           <v-col cols="6" md="3">
             <div class="aboutUs d-sm-block">
               <h5 class="line text-h4 mb-6">معلومات عنا</h5>
-              <nuxt-link class="link footer__link" to="aboutus"
-              >من نحن ؟</nuxt-link
-            >
-            <nuxt-link class="link footer__link" to="ourgoals"
-              >أهداف المنصة</nuxt-link
-            >
-            <nuxt-link class="link footer__link" to="howitwork"
-              >كيف تعمل المنصه</nuxt-link
-            >
+              <nuxt-link class="link footer__link" to="/aboutus"
+                >من نحن ؟</nuxt-link
+              >
+              <nuxt-link class="link footer__link" to="/ourgoals"
+                >أهداف المنصة</nuxt-link
+              >
+              <nuxt-link class="link footer__link" to="/howitwork"
+                >كيف تعمل المنصه</nuxt-link
+              >
             </div>
           </v-col>
 
           <v-col cols="6" md="3">
             <div class="Site_sections">
               <h5 class="line text-h4 mb-6">اقسام الموقع</h5>
-              <nuxt-link class="link footer__link" to="Skills">
+              <nuxt-link class="link footer__link" to="/Skills">
                 المهارات</nuxt-link
               >
-              <nuxt-link class="link footer__link" to="contactus"
+              <nuxt-link class="link footer__link" to="/contactus"
                 >تواصل معنا</nuxt-link
               >
-
             </div>
           </v-col>
 
@@ -50,8 +49,9 @@
             <div class="us">
               <img src="../assets/images/logo.png" alt="Logo" />
               <p class="text-h5">
-                 تسعي المنصة جاهدة لتقديم التعلم وتبادل وتعزيز الخبرات في  العالم العربي
-                نسعى لجعل المعرفة والخبرات متاحة للجميع ونشجع التعليم المستمر
+                تسعي المنصة جاهدة لتقديم التعلم وتبادل وتعزيز الخبرات في العالم
+                العربي نسعى لجعل المعرفة والخبرات متاحة للجميع ونشجع التعليم
+                المستمر
               </p>
             </div>
           </v-col>

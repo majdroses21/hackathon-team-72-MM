@@ -1,4 +1,9 @@
 <template>
+  <Head>
+        <title>
+            Mx| &nbsp; أهداف المنصة
+        </title>
+    </Head>
   <div class="ourgoals">
     <div class="cover">
       <h1 class="head">Our Goals</h1>

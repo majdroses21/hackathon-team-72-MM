@@ -1,7 +1,11 @@
 <template>
   <v-layout>
-    <v-app-bar class="fo" color="#862991
-    " elevation="3">
+    <v-app-bar
+      class="fo"
+      color="#862991
+    "
+      elevation="3"
+    >
       <v-container class="d-flex flex-row">
         <!-- <v-app-bar-nav-icon v-if="!smAndDown"></v-app-bar-nav-icon> -->
         <v-app-bar-nav-icon
@@ -9,8 +13,11 @@
           variant="text"
           @click.stop="drawer = !drawer"
         ></v-app-bar-nav-icon>
-        <v-avatar  class="photoprofile" v-if="!smAndDown && isLogged">
-          <v-img alt="John" src="https://cdn.vuetifyjs.com/images/john.jpg"></v-img>
+        <v-avatar class="photoprofile" v-if="!smAndDown && isLogged">
+          <v-img
+            alt="John"
+            src="https://cdn.vuetifyjs.com/images/john.jpg"
+          ></v-img>
         </v-avatar>
         <nuxt-link style="color: black" to="/Sign-in">
           <v-btn rounded="xl" v-if="!smAndDown" class="login" depressed>
@@ -24,7 +31,8 @@
             >تواصل معنا</nuxt-link
           >
         </v-btn>
-        <v-btn rounded="xl" class="login"><nuxt-link v-if="!smAndDown" class="link" to="/Skills"
+        <v-btn rounded="xl" class="login"
+          ><nuxt-link v-if="!smAndDown" class="link" to="/Skills"
             >تصفح المهارات</nuxt-link
           >
         </v-btn>
@@ -32,21 +40,22 @@
         <div class="logo">
           <nuxt-link to="/">
             <!-- <h1 class="ds">fhrth</h1> -->
-            <img src="../assets/images/LogoNav.png" alt="">
+            <img src="../assets/images/LogoNav.png" alt="" />
           </nuxt-link>
-
         </div>
       </v-container>
     </v-app-bar>
     <!-- <v-navigation-drawer v-model="drawer" color="red"></v-navigation-drawer> -->
     <v-navigation-drawer v-model="drawer" location="bottom" temporary>
       <div class="d-flex flex-column">
-
         <nuxt-link class="linkdrawer" style="color: black" to="/Sign-in">
-
-        
-
-          <v-btn color="#6c5ce7" rounded="xl" v-if="smAndDown" class="login" depressed>
+          <v-btn
+            color="#6c5ce7"
+            rounded="xl"
+            v-if="smAndDown"
+            class="login"
+            depressed
+          >
             <i class="fa-regular fa-right-to-bracket"></i>
             <v-icon icon="mdi-account"></v-icon>
             تسجيل الدخول
@@ -57,13 +66,10 @@
         <nuxt-link class="linkdrawer" to="/contactus">المهارات</nuxt-link>
         <nuxt-link class="linkdrawer" to="/">المدونة</nuxt-link>
         <nuxt-link class="linkdrawer" to="/">تواصل معنا</nuxt-link>
-
       </div>
     </v-navigation-drawer>
   </v-layout>
 </template>
-
-
 
 <style scoped lang="scss">
 .link {
@@ -81,7 +87,7 @@
 .login {
   line-height: 1.5;
   color: white;
-  margin-top: 5px !important
+  margin-top: 5px !important;
 }
 .photoprofile {
   margin-top: 5px;
@@ -121,4 +127,3 @@ watch(group, () => {
   drawer.value = false;
 });
 </script>
-

@@ -1,4 +1,9 @@
 <template>
+  <Head>
+        <title>
+            Mx| &nbsp; استرجاع كلمة المرور
+        </title>
+    </Head>
   <div class="overlay">
     <v-container class="flex min-h-dvh items-center justify-center register">
       <div class="form">

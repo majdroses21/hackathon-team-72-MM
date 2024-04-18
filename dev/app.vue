@@ -41,12 +41,10 @@
   </div>
 </template>
 
-
-
 <style>
+
 body {
   box-sizing: border-box;
-  /* height: 3000000px; */
 }
 /* width */
 ::-webkit-scrollbar {
@@ -69,6 +67,26 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #d1cfcf;
+}
+/*
+.page-enter-active, .page-leave-active{
+  transition: 0.2s all ease-in-out;
+}
+
+.page-enter-frome, .page-leave-to{
+  opacity: 0;
+  transform: scale(0,0);
+  filter: blur(1rem);
+}
+*/
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
 }
 </style>
 

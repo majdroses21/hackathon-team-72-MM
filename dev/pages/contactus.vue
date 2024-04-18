@@ -1,4 +1,9 @@
 <template>
+  <Head>
+        <title>
+            Mx| تواصل معنا
+        </title>
+    </Head>
   <div class="contact">
     <div class="cover">
       <h1 class="head">Contact Us</h1>

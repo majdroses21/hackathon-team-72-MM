@@ -4,8 +4,15 @@
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
+  app:{
+    pageTransition:{
+      name: "page",
+      mode: "in-out"
+    }
+  },
+  
+  // تعيين اللغة والاتجاه
   dir: {
-    // تعيين اللغة والاتجاه
     rtl: true,
     defaultLocale: "ar",
   },
@@ -44,10 +51,3 @@ export default defineNuxtConfig({
     ],
   },
 });
-// export default {
-//   devtools: { enabled: true },
-//   css: ["vuetify/styles/main.sass", "@mdi/font/css/materialdesignicons.css"],
-//   build: {
-//     transpile: ["vuetify"],
-//   }
-// }

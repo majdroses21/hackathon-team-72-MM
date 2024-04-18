@@ -1,4 +1,9 @@
 <template>
+    <Head>
+        <title>
+            Mahartex | الرئيسية 
+        </title>
+    </Head>
     <div>
         <Header />
         <br>

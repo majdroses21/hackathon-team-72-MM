@@ -1,4 +1,9 @@
 <template>
+  <Head>
+        <title>
+            Mx| &nbsp; إنشاء حساب
+        </title>
+    </Head>
   <div class="overlay">
     <v-container class="flex min-h-dvh items-center justify-center Creat">
       <div class="form">

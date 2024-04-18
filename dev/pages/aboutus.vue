@@ -1,4 +1,9 @@
 <template>
+  <Head>
+        <title>
+            Mx| &nbsp; من نحن
+        </title>
+    </Head>
   <div class="aboutus">
     <div class="cover">
       <h1 class="head">About Us</h1>

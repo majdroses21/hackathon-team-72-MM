@@ -1,4 +1,9 @@
 <template>
+    <Head>
+        <title>
+            Mx| &nbsp;  {{ userProfile.name }}
+        </title>
+    </Head>
     <v-container style="min-height: 434px; margin-top: 55px;">
         <v-fade-transition mode="out-in">
             <v-row>

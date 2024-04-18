@@ -1,4 +1,9 @@
 <template>
+     <Head>
+        <title>
+            Mx| كيف تعمل المنصة؟
+        </title>
+    </Head>
     <div class="how-works">
         <div class="howitwork">
             <div class="cover">
@@ -12,7 +17,7 @@
         </div>
         <v-container class="my-5 my-md-10">
             <h1 class="text-center font-weight-bold mb-6">
-                <span class="textdark--text">كيف تعمل المنصه</span>
+                <span class="textdark--text">كيف تعمل المنصة</span>
             </h1>
             <v-row>
                 <v-col cols="12" md="6" class="d-flex align-center px-0 mb-3 mb-md-0 px-md-4 px-2">

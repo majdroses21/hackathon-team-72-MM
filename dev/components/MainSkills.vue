@@ -1,5 +1,8 @@
 <template>
-  
+   <v-container class="text-center">
+        <h1>أختر المجال الذي تدرسة ثم اختر المهارة</h1>
+        <h3>غطي احتياجاتك من المهارات في جميع التخصصات</h3>
+    </v-container>
     <v-container>
         <v-row >
                 <v-col lg="3" md="4" sm="6" xs="6" v-for="mSkill in allMinSkills" :key="mSkill.id">

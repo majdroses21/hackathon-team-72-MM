@@ -1,5 +1,10 @@
 <template>
-    <h1 class="mt-16" dir="rtl" style="margin-right: 190px;">مدرسوا المهارة</h1>
+    <Head>
+        <title>
+            Mx | مدرسوا {{ skillName }}   
+        </title>
+    </Head>
+    <h1 class="mt-16" dir="rtl" style="margin-right: 190px;">مدرسوا {{ skillName }}</h1>
     <v-container class="mt-1">
         <v-row>
             <v-col cols="12" lg="3" md="6" sm="6" xs="1" v-for="(relatedUser, i) in allUsersRealted" :key="i">
@@ -36,6 +41,11 @@
 <script setup>
 const { id } = useRoute().params;
 const url = `http://127.0.0.1:8000/api/skill/${id}/users`;
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+let skillName = router.currentRoute.value.query.skillName;
+console.log(skillName);
 
 
 import { ref } from 'vue';
