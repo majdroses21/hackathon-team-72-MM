@@ -6,7 +6,7 @@
     </Head>
     <h1 class="mt-16" dir="rtl" style="margin-right: 190px;">مدرسوا {{ skillName }}</h1>
     <v-container class="mt-1">
-        <v-row v-if="allUsersRealted.length">
+        <v-row>
             <v-col cols="12" lg="3" md="6" sm="6" xs="1" v-for="(relatedUser, i) in allUsersRealted" :key="i">
                 <v-card class="mx-auto" max-width="400">
                     <v-img class="align-end text-white" height="200" :src="relatedUser.user.coverImg" cover>
@@ -35,9 +35,7 @@
                 </v-card>
             </v-col>
         </v-row>
-        <v-alert dir="rtl" v-else density="compact" :text="'لم ينضم اي مدرسين بعد لـ ' + skillName + ' !! '" title="404" type="warning"></v-alert>
-
-    </v-container> 
+    </v-container>
 </template>
 
 <script setup>
@@ -49,6 +47,7 @@ const router = useRouter()
 let skillName = router.currentRoute.value.query.skillName;
 console.log(skillName);
 
+
 import { ref } from 'vue';
 const allUsersRealted = ref([]);
 
@@ -58,13 +57,12 @@ const getAllRelatedSkillUsers = async () => {
         .then((res) => res.json())
         .then((data) => allUsersRealted.value = data.data)
         .catch(() => { })
-    }
-    
-    onMounted(() => {
-        getAllRelatedSkillUsers();
-    })
-    
-    console.log(allUsersRealted.value.length);
+}
+
+onMounted(() => {
+    getAllRelatedSkillUsers();
+})
+
 </script>
 <style scoped>
 .img-container {

@@ -9,18 +9,21 @@
     </v-container>
 
     <v-container>
-        <v-row v-if="skills.length">
-            <v-col lg="2" md="3" sm="4" xs="4" v-for="(onSkill, i) in skills" :key="i" >
-                    <v-card class="mx-auto" max-width="344" :to="{ path: '/Skills/users/' + onSkill.id, query: { skillName: onSkill.name_ar }}">
+        <v-row>
+            <v-col lg="2" md="3" sm="4" xs="4" v-for="(onSkill, i) in skills" :key="i" v-if="skills.length">
+                <!-- <nuxt-link :to="'/Skills/users/' + onSkill.id"  style="text-decoration:none;"> -->
+                    <nuxt-link :to="{ path: '/Skills/users/' + onSkill.id, query: { skillName: onSkill.name_ar }}" style="text-decoration:none;">
+                    <v-card class="mx-auto" max-width="344">
                         <v-img height="200px" :src="onSkill.img" cover></v-img>
 
                         <v-card-title class=" text-center ">
                             <h3> {{ onSkill.name_en }} </h3>
                         </v-card-title>
                     </v-card>
+                </nuxt-link>
             </v-col>
+            <v-alert v-else density="compact" text="No Any Skills Yet !" title="404" type="warning"></v-alert>
         </v-row>
-        <v-alert v-else density="compact" text="No Any Skills Yet !" title="404" type="warning"></v-alert>
         
     </v-container>
 </template>
