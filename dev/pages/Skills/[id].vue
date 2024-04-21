@@ -1,68 +1,81 @@
 <template>
-     <Head>
-        <title>
-            Mx|   قسم {{ topicTitle }}
-        </title>
-    </Head>
-    <v-container class="mt-14">
-        <v-img class="align-end" height="200" :src="topicImg" cover></v-img>
-    </v-container>
+  <Head>
+    <title>Mx| قسم {{ topicTitle }}</title>
+  </Head>
+  <v-container class="mt-14">
+    <v-img class="align-end" height="200" :src="topicImg" cover></v-img>
+  </v-container>
 
-    <v-container>
-        <v-row>
-            <v-col lg="2" md="3" sm="4" xs="4" v-for="(onSkill, i) in skills" :key="i" v-if="skills.length">
-                <!-- <nuxt-link :to="'/Skills/users/' + onSkill.id"  style="text-decoration:none;"> -->
-                    <nuxt-link :to="{ path: '/Skills/users/' + onSkill.id, query: { skillName: onSkill.name_ar }}" style="text-decoration:none;">
-                    <v-card class="mx-auto" max-width="344">
-                        <v-img height="200px" :src="onSkill.img" cover></v-img>
+  <v-container>
+    <v-row v-if="skills.length">
+      <v-col
+        lg="2"
+        md="3"
+        sm="4"
+        xs="4"
+        v-for="(onSkill, i) in skills"
+        :key="i"
+      >
+        <v-card
+          class="mx-auto"
+          max-width="344"
+          :to="{
+            path: '/Skills/users/' + onSkill.id,
+            query: { skillName: onSkill.name_ar },
+          }"
+          style="text-decoration: none"
+        >
+          <v-img height="200px" :src="onSkill.img" cover></v-img>
 
-                        <v-card-title class=" text-center ">
-                            <h3> {{ onSkill.name_en }} </h3>
-                        </v-card-title>
-                    </v-card>
-                </nuxt-link>
-            </v-col>
-            <v-alert v-else density="compact" text="No Any Skills Yet !" title="404" type="warning"></v-alert>
-        </v-row>
-        
-    </v-container>
+          <v-card-title class="text-center">
+            <h3>{{ onSkill.name_en }}</h3>
+          </v-card-title>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-alert
+      v-else
+      density="compact"
+      text="No Any Skills Yet !"
+      title="404"
+      type="warning"
+    ></v-alert>
+  </v-container>
 </template>
 
 <script setup>
+import useDataApi from "~/composables/useDataApi";
 const { id } = useRoute().params;
-const url = "http://127.0.0.1:8000/api/topic/" + id;
-
-import { ref } from "vue";
 
 const skills = ref([]);
-
-const topicImg = ref('');
-const topicTitle = ref('');
+const topicImg = ref("");
+const topicTitle = ref("");
 
 const getAllRelatedSkills = async () => {
-    await fetch(`http://127.0.0.1:8000/api/topic/` + id)
-        .then((res) => res.json())
-        .then((data) => skills.value = data.data.skill)
-        .catch(() => { })
-}
+  try {
+    
+    const { data ,error } = await useDataApi(`/api/topic/` + id);
+    console.log(data.value.data);
+    skills.value = data.value.data.skill;
+    console.log(error);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const getTobicInfo = async () => {
-    await fetch(`http://127.0.0.1:8000/api/topic/` + id)
-        .then((res) => res.json())
-        .then((data) => {topicImg.value = data.data.img;
-        topicTitle.value = data.data.name_ar
-        })
-        .catch(() => { })
-}
-
-
-
+  try {
+    const {data , error} = await useDataApi(`/api/topic/` + id);
+    topicImg.value = data.value.data.img;
+    topicTitle.value = data.value.data.name_ar;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 onMounted(() => {
-    getAllRelatedSkills();
-    getTobicInfo()
-})
-
-
-
+  getAllRelatedSkills();
+  getTobicInfo();
+});
 </script>

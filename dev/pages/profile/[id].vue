@@ -62,17 +62,19 @@
 
 
 <script setup>
+import useDataApi from "~/composables/useDataApi";
 
 const { id } = useRoute().params;
-const url = `http://127.0.0.1:8000/api/user/${id}/profile`;
 
-import { ref  } from "vue";
 const userProfile = ref([]);
 const getUser = async () => {
-    await fetch(`http://127.0.0.1:8000/api/user/${id}/profile`)
-    .then((res) => res.json())
-    .then((data) => userProfile.value = data.data)
-    .catch((err) => {});
+    const {data , error} = useDataApi(`/api/user/${id}/profile`)
+    try {
+        userProfile.value = data.value.data
+    } catch (error) {
+        console.log("I Catch this Error: " , error);
+    }
+    
 }
 
 
