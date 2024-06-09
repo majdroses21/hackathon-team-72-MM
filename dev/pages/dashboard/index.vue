@@ -27,11 +27,12 @@
     </v-card-text>
   </v-card>
   </template>
-<script>
-  export default {
-    data: () => ({
-      tab: null,
-    }),
-    
-  }
+<script setup>
+const tab = ref(null);
+definePageMeta({
+  middleware: 'auth',  
+})
+useHead({
+  title: 'لوحة التحكم'
+})
 </script>

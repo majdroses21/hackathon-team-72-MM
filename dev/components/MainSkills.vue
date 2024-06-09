@@ -25,6 +25,7 @@
               :src="`http://127.0.0.1:8000` + mSkill.img"
               cover
             >
+            <!-- TODO: When i uplod the API to server change this link -->
             </v-img>
 
             <v-card-text>
@@ -53,7 +54,7 @@ const totalPages = ref("");
 const page = ref(1);
 
 const getAllMinSkills = async () => {
-  const { data, error } =  await useDataApi(`/api/topic?page=${page.value}`);
+  const { data, error } =  await useDataApi(`/api/topic?page=${page.value}`, {});
   allMinSkills.value = data.value.data.data;
   totalPages.value = data.value.totalPage;
   console.log(error);

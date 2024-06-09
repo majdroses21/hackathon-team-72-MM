@@ -1,41 +1,68 @@
+<!-- TODO: لما كون بالفوتر واضغط على رابط ما ابقى بالفوتر -->
 <template>
   <v-layout>
-    <v-app-bar
-      class="fo"
-      color="#862991
-    "
-      elevation="3"
-    >
+    <v-app-bar class="fo" color="#862991
+    " elevation="3">
       <v-container class="d-flex flex-row">
-        <!-- <v-app-bar-nav-icon v-if="!smAndDown"></v-app-bar-nav-icon> -->
-        <v-app-bar-nav-icon
-          v-if="smAndDown"
-          variant="text"
-          @click.stop="drawer = !drawer"
-        ></v-app-bar-nav-icon>
-        <v-avatar class="photoprofile" v-if="!smAndDown && isLogged">
-          <v-img
-            alt="John"
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
-          ></v-img>
-        </v-avatar>
-        <nuxt-link style="color: black" to="/Sign-in">
-          <v-btn rounded="xl" v-if="!smAndDown" class="login" depressed>
-            <i class="fa-regular fa-right-to-bracket"></i>
-            <v-icon icon="mdi-chevron-left"></v-icon>
-            تسجيل الدخول
+        <v-app-bar-nav-icon v-if="smAndDown" variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <!-- user img  -->
+        <nuxt-link to="/my-profile" class="text-decoration-none text-white" v-if="!smAndDown && isLogged">
+          <div class="user-prof">
+            <v-avatar class="photoprofile">
+              <v-img alt="John" :src="userImg"></v-img>
+            </v-avatar>
+            <h3 class="ml-1">{{ firstName }}</h3>
+          </div>
+        </nuxt-link>
+        <!-- User Coins -->
+        <v-btn rounded="xl" v-if="!smAndDown && isLogged" class="login" depressed>
+          <h4>
+            <v-icon icon="mdi mdi-currency-eur"></v-icon>
+            <span>{{ usrCoins }}</span>
+          </h4>
+        </v-btn>
+        <!-- sign IN -->
+        <nuxt-link style="color: black" to="/Sign-in" v-if="!smAndDown && !isLogged">
+          <v-btn rounded="xl" class="login" depressed>
+            <h3>
+              <v-icon icon="mdi-account"></v-icon>
+              تسجيل الدخول
+            </h3>
           </v-btn>
         </nuxt-link>
+        <!-- Log Out -->
+        <v-btn rounded="xl" v-if="!smAndDown && isLogged" class="login" depressed @click="logMeOut()">
+          <h3>
+            <v-icon icon="mdi-logout"></v-icon>
+            <!-- تسجيل الخروج -->
+          </h3>
+        </v-btn>
+
         <v-btn rounded="xl" class="login">
-          <nuxt-link v-if="!smAndDown" class="link" to="/contactus"
-            >تواصل معنا</nuxt-link
-          >
+          <nuxt-link v-if="!smAndDown" class="link" to="/contactus">
+            تواصل معنا
+          </nuxt-link>
         </v-btn>
-        <v-btn rounded="xl" class="login"
-          ><nuxt-link v-if="!smAndDown" class="link" to="/Skills"
-            >تصفح المهارات</nuxt-link
-          >
+
+        <v-btn rounded="xl" class="login">
+          <nuxt-link v-if="!smAndDown" class="link" to="/aboutus">
+            من نحن
+          </nuxt-link>
         </v-btn>
+
+        <v-btn rounded="xl" class="login">
+          <nuxt-link v-if="!smAndDown" class="link" to="/ourgoals">
+            أهداف المنصة
+          </nuxt-link>
+        </v-btn>
+
+        <v-btn rounded="xl" class="login">
+          <nuxt-link v-if="!smAndDown" class="link" to="/Skills">
+            تصفح المهارات
+          </nuxt-link>
+        </v-btn>
+
+
         <v-spacer></v-spacer>
         <div class="logo">
           <nuxt-link to="/">
@@ -49,23 +76,21 @@
     <v-navigation-drawer v-model="drawer" location="bottom" temporary>
       <div class="d-flex flex-column">
         <nuxt-link class="linkdrawer" style="color: black" to="/Sign-in">
-          <v-btn
-            color="#6c5ce7"
-            rounded="xl"
-            v-if="smAndDown"
-            class="login"
-            depressed
-          >
+          <v-btn color="#6c5ce7" rounded="xl" v-if="smAndDown" class="login" depressed>
             <i class="fa-regular fa-right-to-bracket"></i>
             <v-icon icon="mdi-account"></v-icon>
             تسجيل الدخول
           </v-btn>
         </nuxt-link>
         <nuxt-link class="linkdrawer" to="/">الرئيسية</nuxt-link>
-        <nuxt-link class="linkdrawer" to="/profile">الملف الشخصي</nuxt-link>
         <nuxt-link class="linkdrawer" to="/contactus">المهارات</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/ourgoals">أهداف المنصة</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/aboutus">من نحن؟</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/howitwork">كيف تعمل المنصة</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/contactus">تواصل معنا</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/my-profile">الملف الشخصي</nuxt-link>
         <nuxt-link class="linkdrawer" to="/">المدونة</nuxt-link>
-        <nuxt-link class="linkdrawer" to="/">تواصل معنا</nuxt-link>
+        <nuxt-link class="linkdrawer" to="/contactus">تسجيل الخروج</nuxt-link>
       </div>
     </v-navigation-drawer>
   </v-layout>
@@ -81,23 +106,29 @@
   padding: 3px;
   line-height: 1.5;
 }
+
 .ds {
   color: white;
 }
+
 .login {
   line-height: 1.5;
   color: white;
   margin-top: 5px !important;
 }
+
 .photoprofile {
   margin-top: 5px;
 }
+
 .logo {
   color: white;
 }
+
 .logo img {
   width: 155px;
 }
+
 .linkdrawer {
   padding: 15px;
   text-decoration: none;
@@ -105,11 +136,18 @@
   font-weight: bold;
   font-size: 20px;
   text-align: center;
+
   &:hover {
     background: rgb(226, 226, 226);
     color: #6c5ce7;
     transition: 0.3s;
   }
+}
+
+.user-prof {
+  display: flex;
+  text-align: center;
+  align-items: center;
 }
 </style>
 <script setup>
@@ -126,4 +164,41 @@ const group = ref(null);
 watch(group, () => {
   drawer.value = false;
 });
+import useUserState from '~/composables/myProfileInfoState.js'
+
+//
+const {
+  userName,
+  userImg,
+  usrCoins,
+  firstName,
+  fullName,
+  fetchUserProfile
+} = useUserState()
+
+// Fetch user profile when component is mounted
+fetchUserProfile()
+
+const logMeOut = async () => {
+  // Delete Token From Lochal Storege => Not Just menwally Distoid The Token From The API
+  // set Value Of logedIn false in useState 
+  // Show Alert Said 'You have been loged Out Successfuly'
+  // Delete User Info Stored in The Store 
+  try {
+    let { data, error } = await useDataApi('/api/logout');
+    if (data.value.status) {
+      useSonner.success(data.value.msg);
+      localStorage.removeItem('token');
+      setTimeout(() => {
+        navigateTo({ name: "index" })
+      }, 2000);
+    } else {
+      useSonner.error(data.value.msg);
+    }
+
+  } catch (error) {
+    console.log('Your error is: ', error);
+  }
+}
+
 </script>

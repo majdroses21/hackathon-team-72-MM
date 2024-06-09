@@ -33,9 +33,6 @@
           </v-stepper>
         </v-form>
         </v-dialog>
-
-
-
       </div>
     </NuxtLayout>
   </div>
@@ -91,9 +88,8 @@ body {
 </style>
 
 <script setup>
-import { ref } from 'vue';
 const router = useRouter();
-let hasFilledData = true;
+let hasFilledData = true; // if false daeilog  will be hid || if true dialog will be dissplay 
 let loggedIn = useState('loggedIn', ()=>false)
 const basicSkill = ref('');
 const subSkills = ref('');
@@ -129,6 +125,6 @@ const submitForm = () => {
   hasFilledData = false
 
 };
-
+console.log(useState('loggedIn'));
 </script>
 

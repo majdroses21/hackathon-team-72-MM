@@ -1,67 +1,3 @@
-<template>
-  <Head>
-        <title>
-            Mx| &nbsp; تسجيل الدخول 
-        </title>
-    </Head>
-  <div class="overlay">
-  <v-container class="flex min-h-dvh items-center justify-center register">
-    <div class="form">
-      <div class="text-center">
-        <h1 class="text-3xl font-semibold lg:text-4xl">Sign in</h1>
-        <p class="mt-2 text-lg text-muted-foreground">
-          Welcom back! Enter your details to get started.
-        </p>
-      </div>
-      <v-form @submit.prevent="submitForm" class="mt-10">
-        <fieldset class="grid gap-5">
-          <v-text-field
-            label="البريد الإلكتروني *"
-            placeholder="Mohazem@example.com"
-            type="email"
-            :rules="[rules.required, rules.email]"
-            required
-          ></v-text-field>
-          <v-text-field
-            class="pass"
-            label="الرقم السري *"
-            :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-            :type="showPassword ? 'text' : 'password'"
-            @click:append="toggleShowPassword"
-            type="password"
-            :rules="[rules.required, rules.minLength]"
-            required
-          ></v-text-field>
-          <div class="pl-3 pr-3 d-flex flex-column ga-2">
-            <p>
-              <NuxtLink
-                class="text-sm font-semibold text-primary forgetpass"
-                to="/forgot-password"
-                >forgot passwor?</NuxtLink
-              >
-            </p>
-            <v-btn type="submit" class="w-fill"> Sign in </v-btn>
-            <div class="or">or</div>
-            <v-btn  class="p-5 w-full" outlined>
-              <v-icon>mdi-google</v-icon> Sign in with
-              Google
-            </v-btn>
-          </div>
-        </fieldset>
-      </v-form>
-      <p class="mt-10 text-center text-sm">
-        Don't have an account?
-        <NuxtLink
-          class="text-sm font-semibold text-primary forgetpass"
-          to="/register"
-          >Create one here?</NuxtLink
-        >
-      </p>
-    </div>
-  </v-container>
-</div>
-</template>
-
 <style scoped lang="scss">
 .overlay {
   background-image: url(../../assets/images/workplace-with-blue-office-supplies_23-2147843328.jpg);
@@ -79,13 +15,16 @@
   margin: 70px auto;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
+
 .pass {
   width: 100% !important;
 }
+
 .or {
   text-align: center;
   position: relative;
 }
+
 .or::after {
   content: "";
   height: 1px;
@@ -107,12 +46,21 @@
   left: -8px;
   top: 12px;
 }
+
 .forgetpass {
   color: rgb(2 121 255) !important;
   text-decoration: none;
+
   &:hover {
     text-decoration: underline;
   }
+}
+
+.login-alert {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 99;
 }
 
 @media (max-width: 767px) {
@@ -122,47 +70,110 @@
 }
 </style>
 
-<script setup>
-import { ref } from "vue";
-import api from "~/composables/api"
-const name = ref('');
-const email = ref('');
-const password = ref("");
-const showPassword = ref(false);
-const loggedIn = useState('loggedIn', ()=>false)
-const token = useState('token', ()=>null)
+<template>
 
+  <Head>
+    <title>Mx| &nbsp; تسجيل الدخول</title>
+  </Head>
+  <div class="overlay">
+    <v-container class="flex min-h-dvh items-center justify-center register">
+      <div class="form">
+        <div class="text-center">
+          <h1 class="text-3xl font-semibold lg:text-4xl">Sign in</h1>
+          <p class="mt-2 text-lg text-muted-foreground">
+            Welcom back! Enter your details to get started.
+          </p>
+        </div>
+        <v-form @submit.prevent="submitForm" class="mt-10">
+          <fieldset class="grid gap-5">
+            <v-text-field label="البريد الإلكتروني *" placeholder="Mohazem@example.com" type="email"
+              :rules="[rules.required, rules.email]" v-model="email" required></v-text-field>
+
+            <v-text-field class="pass" label="الرقم السري *" :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+              :type="showPassword ? 'text' : 'password'" @click:append="toggleShowPassword" v-model="password"
+              required></v-text-field>
+            <!-- :rules="[rules.required, rules.minLength]" -->
+            <div class="pl-3 pr-3 d-flex flex-column ga-2">
+              <p>
+                <NuxtLink class="text-sm font-semibold text-primary forgetpass" to="/forgot-password">forgot passwor?
+                </NuxtLink>
+              </p>
+              <v-btn type="submit" class="w-fill"> Sign in </v-btn>
+              <div class="or">or</div>
+              <!-- TODO : Get user info by Google -->
+              <v-btn class="p-5 w-full" outlined>
+                <v-icon>mdi-google</v-icon>
+                &nbsp; Sign in with Google
+              </v-btn>
+            </div>
+          </fieldset>
+        </v-form>
+        <p class="mt-10 text-center text-sm">
+          Don't have an account?
+          <NuxtLink class="text-sm font-semibold text-primary forgetpass" to="/register">Create one here?</NuxtLink>
+        </p>
+      </div>
+    </v-container>
+  </div>
+  <!-- TODO: Fix Aletrs With Api Call -->
+
+  <!-- Success Alert -->
+  <!-- title="Loged in Succesfuly" -->
+  <v-alert :text="loginMessege" type="success" closable v-model="alertStatus" class="login-alert"></v-alert>
+  <!-- Error Alert -->
+  <v-alert v-if="(loginStatus = false)" :text="loginMessege" type="error" closable class="login-alert"></v-alert>
+  <!-- v-model="alertStatus" -->
+</template>
+
+<script setup>
+
+import useDataApi from "~/composables/useDataApi";
+// Data
+const email = ref("majd@gmail.com");
+const password = ref("123123");
+let alertStatus = false;
+
+// This will Show and hide the pasword
+const showPassword = ref(false);
 const toggleShowPassword = () => {
   showPassword.value = !showPassword.value;
 };
 
+// This ruls for validation for required filds in the Form
 const rules = {
-  required: (value) => !!value || 'This field is required',
-  minLength: (value) => (value && value.length >= 8) || 'Password must be at least 8 characters',
-  email: (value) => /.+@.+\..+/.test(value) || 'Invalid email address'
+  required: (value) => !!value || "This field is required",
+  minLength: (value) =>
+    (value && value.length >= 8) || "Password must be at least 8 characters",
+  email: (value) => /.+@.+\..+/.test(value) || "Invalid email address",
 };
 
-const submitForm = async() => {
-
-  // Submit form logic
+// Submit form login
+const submitForm = async () => {
   try {
-    const loginRes = await api('/api/login', {
+    const loginRes = await useDataApi("/api/login", {
       query: {
         email,
-        password
-      }
-    })
-    console.log('loginRes = ', loginRes)
-    if(loginRes.status){
-      // login success
-      loggedIn.value = true
-      token.value = loginRes.access_token
+        password,
+      },
+    });
+    console.log(loginRes.data.value);
+    let token = loginRes.data.value.access_token;
+    let loginMessege = loginRes.data.value.msg;
+    let loginStatus = loginRes.data.value.status;
 
-      navigateTo("/dashboard");
+    // login success
+    if (loginStatus) {
+      localStorage.setItem("token", token);
+      useState("loggedIn", () => true);
+      alertStatus = true;
+      setTimeout(() => {
+        // navigateTo("/");
+      }, 2500);
     }
-    // throw 'UNEXPRECTED ERROR'
   } catch (error) {
     useSonner.error("Error: ", error.response.message);
   }
 };
+// const token = useState("token", () => null);
+// const loggedIn = useState("loggedIn", () => false); // I don't know what it's right now
 </script>
