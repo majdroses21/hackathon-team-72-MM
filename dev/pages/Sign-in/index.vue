@@ -163,17 +163,17 @@ const submitForm = async () => {
 
     // login success
     if (loginStatus) {
-      localStorage.setItem("token", token);
+      useCookie("token").value = token
       useState("loggedIn", () => true);
       alertStatus = true;
+      console.log();
+      useSonner.success(loginMessege);
       setTimeout(() => {
-        // navigateTo("/");
-      }, 2500);
+        navigateTo("/");
+      }, 1000);
     }
   } catch (error) {
     useSonner.error("Error: ", error.response.message);
   }
 };
-// const token = useState("token", () => null);
-// const loggedIn = useState("loggedIn", () => false); // I don't know what it's right now
 </script>

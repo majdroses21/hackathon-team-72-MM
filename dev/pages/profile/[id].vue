@@ -68,7 +68,7 @@ const { id } = useRoute().params;
 
 const userProfile = ref([]);
 const getUser = async () => {
-    const {data , error} = useDataApi(`/api/user/${id}/profile`)
+    const {data , error} = await useDataApi(`/api/user/${id}/profile`)
     try {
         userProfile.value = data.value.data
     } catch (error) {

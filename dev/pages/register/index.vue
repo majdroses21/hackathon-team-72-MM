@@ -153,7 +153,11 @@ const registerHandler = async () => {
     });
 
     let token = loginRes.data.value.access_token;
-    console.log(token);
+    useCookie("token").value = token;
+    useSonner.success("You has create your accout successffly and Logged in Wellcome");
+    setTimeout(() => {
+      navigateTo("/");
+    }, 1500);
 
     
   } catch (error) {

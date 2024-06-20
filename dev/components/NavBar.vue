@@ -180,15 +180,11 @@ const {
 fetchUserProfile()
 
 const logMeOut = async () => {
-  // Delete Token From Lochal Storege => Not Just menwally Distoid The Token From The API
-  // set Value Of logedIn false in useState 
-  // Show Alert Said 'You have been loged Out Successfuly'
-  // Delete User Info Stored in The Store 
   try {
     let { data, error } = await useDataApi('/api/logout');
     if (data.value.status) {
       useSonner.success(data.value.msg);
-      localStorage.removeItem('token');
+      useCookie("token").value = null;
       setTimeout(() => {
         navigateTo({ name: "index" })
       }, 2000);

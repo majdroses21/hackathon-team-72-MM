@@ -36,7 +36,7 @@ export default function (
   console.log("opts is :" , opts);
   const loggedIn = useState('loggedIn', () => true)
 
-  const token = localStorage.getItem('token');
+  const token = useCookie("token").value;
 
   let headers = {};
   if (opts) {
