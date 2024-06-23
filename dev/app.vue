@@ -111,7 +111,7 @@ import useDataApi from "~/composables/useDataApi";
 const router = useRouter();
 let hasFilledData = true; // if false daeilog  will be hid || if true dialog will be dissplay
 let loggedIn = useState("loggedIn", () => false);
-const basicSkill = ref("");
+// The Forme info gte data to sen 
 const subSkills = ref("");
 const jobTitle = ref("");
 const education = ref("");
@@ -138,11 +138,9 @@ const rules = {
   email: value => /.+@.+\..+/.test(value) || "Invalid email address"
 };
 
-console.log("a7a");
+//  in here i'm feching this api to get the info showing in the Select 
 let skilsArray = ref([]);
-
 let topicsArray = ref([]);
-
 const fechDataForSelects = async () => {
   console.log('ffddfdfdfdffffffffffffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddd');
   try {
@@ -157,9 +155,18 @@ const fechDataForSelects = async () => {
 fechDataForSelects();
 
 
+// This Stuf for sending images
+const onFileChange = (event, type) => {
+  const file = event.target.files[0];
+  if (type === 'profilePicture') {
+    profilePicture.value = file;
+  } else if (type === 'coverPhoto') {
+    coverPhoto.value = file;
+  }
+};
+
+// This For Submit The Data 
 const submitForm = async () => {
-  // You can send the entered data to the server here
-  console.log("basicSkill:", basicSkill.value);
   console.log("subSkills:", subSkills.value);
   console.log("jobTitle:", jobTitle.value);
   console.log("education:", education.value);
@@ -168,40 +175,36 @@ const submitForm = async () => {
   console.log("platformLink:", platformLink.value);
   console.log("profilePicture:", profilePicture.value);
   console.log("coverPhoto:", coverPhoto.value);
+  
+  const formData = new FormData();
+  // formData.append('user_id', usrId.value);
+  formData.append('user_id', 1);
+  formData.append('skill_id', subSkills.value);
+  formData.append('subSkills', 'delet this');
+  formData.append('jobTitle', jobTitle.value);
+  formData.append('education', education.value);
+  formData.append('currentJob', currentJob.value);
+  formData.append('resume', resume.value);
+  formData.append('platformLink', platformLink.value);
+  formData.append('rating', 3);
+  formData.append('img', profilePicture.value);
+  formData.append('coverImg', coverPhoto.value);
 
   const {data, error} = await useDataApi("/api/setUserProfile", {
     method: "POST",
-    body: {
-      // inBack: basicSkill.value,
-      // user_id: usrId.value,
-      user_id: 1,
-      skill_id: subSkills.value, // needed value as 4 disblay name as javaScript
-      subSkills: "delet this",
-      jobTitle: jobTitle.value,
-      education: education.value,
-      currentJob: currentJob.value,
-      resume: resume.value,
-      platformLink: platformLink.value,
-      rating: 3,
-      img: profilePicture.value, 
-      coverImg: coverPhoto.value 
-    }
+    body: formData,
   });
+
   if (data.value.status == true) {
     useSonner.success(data.value.msg);
     hasFilledData = false;
+     useState("loggedIn", () => true);
   } else {
     useSonner.error(data.value.msg)
   }
-  // loggedIn = useState("loggedIn", () => true);
-  // document.querySelector(".poupup").style.display = "none";
-  // hasFilledData = false;
-  // console.log(useState("loggedIn"));
   
 };
 
-
-
-
+// document.querySelector(".poupup").style.display = "none";
 
 </script>
