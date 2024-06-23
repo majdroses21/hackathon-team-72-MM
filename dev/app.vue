@@ -6,32 +6,50 @@
       <div class="poupup" v-if="loggedIn">
         <v-dialog v-model="hasFilledData" persistent max-width="450px">
           <v-form @submit.prevent>
-          <v-stepper :items="['Step 1', 'Step 2', 'Step 3',]">
+            <v-stepper :items="['Step 1', 'Step 2', 'Step 3',]">
+              <template v-slot:item.1>
+                <v-card title="Step One" flat>
+                  <!-- <v-text-field :rules="[rules.required]" required label="Basic Skill"
+                    v-model="basicSkill"></v-text-field> -->
+                  <!-- <v-text-field type="text" :rules="[rules.required]" required label="Sub Skills" v-model="subSkills"></v-text-field> -->
+                  <!-- <v-select v-model="selectedOption" :items="['Step 1', 'Step 2', 'Step 3',]" label="Basic Skill" solo></v-select> -->
+                  <!-- <v-select  :items="skilsArray" label="Sub Skills" ></v-select> -->
+                  <div >
+                  <!-- <v-select  :items="skilsArray" v-model="skilsArray"></v-select> -->
 
-            <template v-slot:item.1>
-              <v-card title="Step One" flat> <v-text-field  :rules="[rules.required]" required label="Basic Skill" v-model="basicSkill"></v-text-field>
-                <v-text-field type="text" :rules="[rules.required]" required label="Sub Skills" v-model="subSkills"></v-text-field>
-                <v-text-field type="text" label="Job Title" v-model="jobTitle"></v-text-field>
-                <v-text-field type="text"  :rules="[rules.required]" required label="Education" v-model="education"></v-text-field></v-card>
-            </template>
+                  </div>
+                  <select name="" id="" v-model="subSkills" >
+                    <option :value="sk.id" v-for="sk in skilsArray">
+                    {{ sk.name_ar }}
+                    </option>
+                  </select>
+                  <v-text-field type="text" label="Job Title" v-model="jobTitle"></v-text-field>
+                  <v-text-field type="text" :rules="[rules.required]" required label="Education"
+                    v-model="education"></v-text-field>
+                </v-card>
+              </template>
 
-            <template v-slot:item.2>
-              <v-card title="Step Two" flat> <v-text-field  :rules="[rules.required]" required label="Current Job" v-model="currentJob"></v-text-field>
-                <v-textarea  :rules="[rules.required]" required label="Resume" v-model="resume"></v-textarea></v-card>
-            </template>
+              <template v-slot:item.2>
+                <v-card title="Step Two" flat>
+                  <v-text-field :rules="[rules.required]" required label="Current Job"
+                    v-model="currentJob"></v-text-field>
+                  <v-textarea :rules="[rules.required]" required label="Resume" v-model="resume"></v-textarea>
+                </v-card>
+              </template>
 
-            <template v-slot:item.3>
-              <v-card title="Step Three" flat> <v-text-field  :rules="[rules.required]" required label="Platform Account Link" v-model="platformLink"></v-text-field>
-                <v-file-input  :rules="[rules.required]" required label="Upload Profile Picture" v-model="profilePicture"></v-file-input>
-                <v-file-input  :rules="[rules.required]" required label="Upload Cover Photo" v-model="coverPhoto"></v-file-input>
-                <v-btn @click="submitForm" color="red" type="submit">Submit</v-btn>
-
-              </v-card>
-            </template>
-
-
-          </v-stepper>
-        </v-form>
+              <template v-slot:item.3>
+                <v-card title="Step Three" flat>
+                  <v-text-field :rules="[rules.required]" required label="Platform Account Link"
+                    v-model="platformLink"></v-text-field>
+                  <v-file-input :rules="[rules.required]" required label="Upload Profile Picture"
+                    v-model="profilePicture"></v-file-input>
+                  <v-file-input :rules="[rules.required]" required label="Upload Cover Photo"
+                    v-model="coverPhoto"></v-file-input>
+                  <v-btn @click="submitForm" color="red" type="submit">Submit</v-btn>
+                </v-card>
+              </template>
+            </v-stepper>
+          </v-form>
         </v-dialog>
       </div>
     </NuxtLayout>
@@ -39,10 +57,10 @@
 </template>
 
 <style>
-
 body {
   box-sizing: border-box;
 }
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -58,13 +76,13 @@ body {
   background: #888;
   border-radius: 9px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #d1cfcf;
 }
+
 /*
 .page-enter-active, .page-leave-active{
   transition: 0.2s all ease-in-out;
@@ -80,6 +98,7 @@ body {
 .page-leave-active {
   transition: all 0.4s;
 }
+
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
@@ -88,26 +107,57 @@ body {
 </style>
 
 <script setup>
+import useDataApi from "~/composables/useDataApi";
 const router = useRouter();
-let hasFilledData = true; // if false daeilog  will be hid || if true dialog will be dissplay 
-let loggedIn = useState('loggedIn', ()=>false)
-const basicSkill = ref('');
-const subSkills = ref('');
-const jobTitle = ref('');
-const education = ref('');
+let hasFilledData = true; // if false daeilog  will be hid || if true dialog will be dissplay
+let loggedIn = useState("loggedIn", () => false);
+const basicSkill = ref("");
+const subSkills = ref("");
+const jobTitle = ref("");
+const education = ref("");
 const currentJob = ref("");
 const resume = ref("");
 const platformLink = ref("");
 const profilePicture = ref("");
 const coverPhoto = ref("");
 
+// Get UserId From Composbels 
+import useUserState from '~/composables/myProfileInfoState.js'
+const { 
+  usrId, 
+  fetchUserProfile
+} = useUserState()
+console.log(usrId.value);
+fetchUserProfile()
 
+// This Ruls For Form Valdations
 const rules = {
-  required: (value) => !!value || 'This field is required',
-  minLength: (value) => (value && value.length >= 8) || 'Password must be at least 8 characters',
-  email: (value) => /.+@.+\..+/.test(value) || 'Invalid email address'
+  required: value => !!value || "This field is required",
+  minLength: value =>
+    (value && value.length >= 8) || "Password must be at least 8 characters",
+  email: value => /.+@.+\..+/.test(value) || "Invalid email address"
 };
-const submitForm = () => {
+
+console.log("a7a");
+let skilsArray = ref([]);
+
+let topicsArray = ref([]);
+
+const fechDataForSelects = async () => {
+  console.log('ffddfdfdfdffffffffffffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddd');
+  try {
+    const {data , error} = await useDataApi('/api/getUserProfile');
+    console.log(data.value);
+    skilsArray.value = data.value.skills
+    // topicsArray.value = data.value.topics
+} catch (error) {
+  console.log('Select Error 504' , error);
+  }
+}
+fechDataForSelects();
+
+
+const submitForm = async () => {
   // You can send the entered data to the server here
   console.log("basicSkill:", basicSkill.value);
   console.log("subSkills:", subSkills.value);
@@ -118,13 +168,40 @@ const submitForm = () => {
   console.log("platformLink:", platformLink.value);
   console.log("profilePicture:", profilePicture.value);
   console.log("coverPhoto:", coverPhoto.value);
-  // After sending the data, you can redirect the user to the homepage or any other page
-  router.push('/');
-  document.querySelector(".poupup").style.display = 'none'
-  loggedIn = useState('loggedIn', ()=>true)
-  hasFilledData = false
 
+  const {data, error} = await useDataApi("/api/setUserProfile", {
+    method: "POST",
+    body: {
+      // inBack: basicSkill.value,
+      // user_id: usrId.value,
+      user_id: 1,
+      skill_id: subSkills.value, // needed value as 4 disblay name as javaScript
+      subSkills: "delet this",
+      jobTitle: jobTitle.value,
+      education: education.value,
+      currentJob: currentJob.value,
+      resume: resume.value,
+      platformLink: platformLink.value,
+      rating: 3,
+      img: profilePicture.value, 
+      coverImg: coverPhoto.value 
+    }
+  });
+  if (data.value.status == true) {
+    useSonner.success(data.value.msg);
+    hasFilledData = false;
+  } else {
+    useSonner.error(data.value.msg)
+  }
+  // loggedIn = useState("loggedIn", () => true);
+  // document.querySelector(".poupup").style.display = "none";
+  // hasFilledData = false;
+  // console.log(useState("loggedIn"));
+  
 };
-console.log(useState('loggedIn'));
-</script>
 
+
+
+
+
+</script>
