@@ -5,6 +5,7 @@
       <v-sooner />
       <div class="poupup" v-if="loggedIn">
         <v-dialog v-model="hasFilledData" persistent max-width="450px">
+      {{ hasFilledData }}
           <v-form @submit.prevent>
             <v-stepper :items="['Step 1', 'Step 2', 'Step 3',]">
               <template v-slot:item.1>
@@ -12,17 +13,8 @@
                   <!-- <v-text-field :rules="[rules.required]" required label="Basic Skill"
                     v-model="basicSkill"></v-text-field> -->
                   <!-- <v-text-field type="text" :rules="[rules.required]" required label="Sub Skills" v-model="subSkills"></v-text-field> -->
-                  <!-- <v-select v-model="selectedOption" :items="['Step 1', 'Step 2', 'Step 3',]" label="Basic Skill" solo></v-select> -->
-                  <!-- <v-select  :items="skilsArray" label="Sub Skills" ></v-select> -->
-                  <div >
-                  <!-- <v-select  :items="skilsArray" v-model="skilsArray"></v-select> -->
-
-                  </div>
-                  <select name="" id="" v-model="subSkills" >
-                    <option :value="sk.id" v-for="sk in skilsArray">
-                    {{ sk.name_ar }}
-                    </option>
-                  </select>
+                  <v-autocomplete :items="skilsArray" item-title="name_ar" item-value="id" clearable
+                    v-model="subSkills"></v-autocomplete>
                   <v-text-field type="text" label="Job Title" v-model="jobTitle"></v-text-field>
                   <v-text-field type="text" :rules="[rules.required]" required label="Education"
                     v-model="education"></v-text-field>
@@ -109,7 +101,6 @@ body {
 <script setup>
 import useDataApi from "~/composables/useDataApi";
 const router = useRouter();
-let hasFilledData = true; // if false daeilog  will be hid || if true dialog will be dissplay
 let loggedIn = useState("loggedIn", () => false);
 // The Forme info gte data to sen 
 const subSkills = ref("");
@@ -123,12 +114,22 @@ const coverPhoto = ref("");
 
 // Get UserId From Composbels 
 import useUserState from '~/composables/myProfileInfoState.js'
-const { 
-  usrId, 
+const {
+  usrId,
+  hasFilledData,
+  usrRating,
   fetchUserProfile
 } = useUserState()
 console.log(usrId.value);
+console.log(hasFilledData.value);
+console.log(usrRating.value);
 fetchUserProfile()
+
+
+useState("hasFilledData").value = true;
+
+console.log(hasFilledData.value);
+
 
 // This Ruls For Form Valdations
 const rules = {
@@ -142,14 +143,13 @@ const rules = {
 let skilsArray = ref([]);
 let topicsArray = ref([]);
 const fechDataForSelects = async () => {
-  console.log('ffddfdfdfdffffffffffffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddd');
   try {
-    const {data , error} = await useDataApi('/api/getUserProfile');
+    const { data, error } = await useDataApi('/api/getUserProfile');
     console.log(data.value);
     skilsArray.value = data.value.skills
     // topicsArray.value = data.value.topics
-} catch (error) {
-  console.log('Select Error 504' , error);
+  } catch (error) {
+    console.log('Select Error 504', error);
   }
 }
 fechDataForSelects();
@@ -167,44 +167,34 @@ const onFileChange = (event, type) => {
 
 // This For Submit The Data 
 const submitForm = async () => {
-  console.log("subSkills:", subSkills.value);
-  console.log("jobTitle:", jobTitle.value);
-  console.log("education:", education.value);
-  console.log("currentJob:", currentJob.value);
-  console.log("resume:", resume.value);
-  console.log("platformLink:", platformLink.value);
-  console.log("profilePicture:", profilePicture.value);
-  console.log("coverPhoto:", coverPhoto.value);
-  
   const formData = new FormData();
   // formData.append('user_id', usrId.value);
-  formData.append('user_id', 1);
+  formData.append('user_id', 5);
   formData.append('skill_id', subSkills.value);
-  formData.append('subSkills', 'delet this');
   formData.append('jobTitle', jobTitle.value);
   formData.append('education', education.value);
   formData.append('currentJob', currentJob.value);
   formData.append('resume', resume.value);
   formData.append('platformLink', platformLink.value);
   formData.append('rating', 3);
-  formData.append('img', profilePicture.value);
-  formData.append('coverImg', coverPhoto.value);
-
-  const {data, error} = await useDataApi("/api/setUserProfile", {
+  formData.append('img', profilePicture.value[0]);
+  formData.append('coverImg', coverPhoto.value[0]);
+  const { data, error } = await useDataApi("/api/setUserProfile", {
     method: "POST",
     body: formData,
   });
+  console.log('Data is :', data.value);
+  console.log('Err is :', error.value);
+  console.log(data.value);
 
-  if (data.value.status == true) {
+  if (data.value.message == "Insert successfully") {
+    useState("hasFilledData").value = false;
     useSonner.success(data.value.msg);
-    hasFilledData = false;
-     useState("loggedIn", () => true);
   } else {
     useSonner.error(data.value.msg)
   }
   
 };
 
-// document.querySelector(".poupup").style.display = "none";
 
 </script>

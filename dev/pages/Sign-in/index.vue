@@ -129,7 +129,7 @@
 
 import useDataApi from "~/composables/useDataApi";
 // Data
-const email = ref("majd@gmail.com");
+const email = ref("mjd@gmail.com");
 const password = ref("123123");
 let alertStatus = false;
 
@@ -151,6 +151,7 @@ const rules = {
 const submitForm = async () => {
   try {
     const loginRes = await useDataApi("/api/login", {
+      method: 'POST',
       query: {
         email,
         password,

@@ -9,6 +9,8 @@ export default function useUserState() {
   const usrCoins = useState('usrCoins', () => '')
   const usrRating = useState('usrRating', () => '')
   const profilArr = useState('profilArr', () => [])
+  const hasFilledData = useState('hasFilledData', () => null)
+
 
   const fetchUserProfile = async () => {
     try {
@@ -24,6 +26,7 @@ export default function useUserState() {
       usrCoins.value = myData.coins
       profilArr.value = myData.profile
       usrRating.value = profilArr.value[0].rating
+      hasFilledData.value ;
     } catch (error) {
       console.log('Your Error is:', error)
     }
@@ -42,6 +45,7 @@ export default function useUserState() {
     usrCoins,
     usrRating,
     profilArr,
+    hasFilledData,
     fetchUserProfile,
     firstName,
     lastName,

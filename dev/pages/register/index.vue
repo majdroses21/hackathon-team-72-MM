@@ -132,7 +132,7 @@ const birthday = ref("");
 
 const registerHandler = async () => {
   try {
-    const registerRes = await useDataApi('/api/rigester', {
+    const registerRes = await useDataApi('/api/register', {
       method: 'POST',
       body: {
         name: firstName.value + ' ' + lastName.value,
