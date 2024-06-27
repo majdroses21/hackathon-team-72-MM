@@ -141,8 +141,6 @@ const registerHandler = async () => {
         password_confirmation: password_conf.value
       }
     });
-    console.log(registerRes.data.value.user);
-    console.log('registerRes = ', registerRes);
 
     //Second log in the user created 
     const loginRes = await useDataApi("/api/login", {

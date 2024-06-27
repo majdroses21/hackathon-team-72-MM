@@ -157,7 +157,6 @@ const submitForm = async () => {
         password,
       },
     });
-    console.log(loginRes.data.value);
     let token = loginRes.data.value.access_token;
     let loginMessege = loginRes.data.value.msg;
     let loginStatus = loginRes.data.value.status;
@@ -167,7 +166,6 @@ const submitForm = async () => {
       useCookie("token").value = token
       useState("loggedIn", () => true);
       alertStatus = true;
-      console.log();
       useSonner.success(loginMessege);
       setTimeout(() => {
         navigateTo("/");

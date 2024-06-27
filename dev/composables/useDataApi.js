@@ -43,7 +43,6 @@ export default function (
     headers = { ...opts.headers }
   }
   if (loggedIn.value) {
-    console.log("loged in");
     headers.Authorization = `Bearer ${token}`;
   }
 

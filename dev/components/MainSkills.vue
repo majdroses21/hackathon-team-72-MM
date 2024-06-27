@@ -57,7 +57,6 @@ const getAllMinSkills = async () => {
   const { data, error } =  await useDataApi(`/api/topic?page=${page.value}`, {});
   allMinSkills.value = data.value.data.data;
   totalPages.value = data.value.totalPage;
-  console.log(error);
 };
 
 onMounted(() => {

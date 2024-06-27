@@ -16,7 +16,6 @@ export default function useUserState() {
     try {
       const userProfilData = await useDataApi('/api/profile')
       const myData = userProfilData.data.value.data
-      console.log(myData)
 
       userName.value = myData.name
       usrId.value = myData.id

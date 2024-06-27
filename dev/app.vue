@@ -120,15 +120,10 @@ const {
   usrRating,
   fetchUserProfile
 } = useUserState()
-console.log(usrId.value);
-console.log(hasFilledData.value);
-console.log(usrRating.value);
 fetchUserProfile()
 
 
 useState("hasFilledData").value = true;
-
-console.log(hasFilledData.value);
 
 
 // This Ruls For Form Valdations
@@ -145,11 +140,9 @@ let topicsArray = ref([]);
 const fechDataForSelects = async () => {
   try {
     const { data, error } = await useDataApi('/api/getUserProfile');
-    console.log(data.value);
     skilsArray.value = data.value.skills
     // topicsArray.value = data.value.topics
   } catch (error) {
-    console.log('Select Error 504', error);
   }
 }
 fechDataForSelects();
@@ -168,8 +161,8 @@ const onFileChange = (event, type) => {
 // This For Submit The Data 
 const submitForm = async () => {
   const formData = new FormData();
-  // formData.append('user_id', usrId.value);
-  formData.append('user_id', 5);
+  // formData.append('user_id', 5);
+  formData.append('user_id', usrId.value); // sometime sudnlly cant get the usrId
   formData.append('skill_id', subSkills.value);
   formData.append('jobTitle', jobTitle.value);
   formData.append('education', education.value);
@@ -183,9 +176,6 @@ const submitForm = async () => {
     method: "POST",
     body: formData,
   });
-  console.log('Data is :', data.value);
-  console.log('Err is :', error.value);
-  console.log(data.value);
 
   if (data.value.message == "Insert successfully") {
     useState("hasFilledData").value = false;

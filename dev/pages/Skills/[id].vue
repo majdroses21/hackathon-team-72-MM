@@ -55,9 +55,7 @@ const getAllRelatedSkills = async () => {
   try {
     
     const { data ,error } = await useDataApi(`/api/topic/` + id);
-    console.log(data.value.data);
     skills.value = data.value.data.skill;
-    console.log(error);
 
   } catch (error) {
     console.log(error);

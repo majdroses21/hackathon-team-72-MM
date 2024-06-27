@@ -157,7 +157,6 @@ let isLogged = useState("loggedIn", () => false);
 
 // Destructure only the keys you want to use
 const { smAndDown } = useDisplay();
-console.log(useDisplay);
 
 const drawer = ref(false);
 const group = ref(null);
