@@ -45,7 +45,8 @@ export default function (
   if (loggedIn.value) {
     headers.Authorization = `Bearer ${token}`;
   }
-
+// https://api-mahrtex.000webhostapp.com
+// http://127.0.0.1:8000
   return useFetch('http://127.0.0.1:8000' + request, {
     ...opts,
     headers,
