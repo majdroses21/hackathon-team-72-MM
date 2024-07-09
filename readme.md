@@ -1,5 +1,5 @@
 # MaharteX مهارتكس
-### (NuxtJS - VueJs - Vuetify)
+### (NuxtJS - VueJs - Vuetify - Pinia)
 
 ## Project Description 
 #### Mahartex is an electronic platform for skill exchange among Arab youth. The website concept provides users with 500 points upon creating an account, which they can use to learn new skills in programming, English language, or any other field. Points can be earned by teaching a skill the user possesses to anyone on the platform.
@@ -38,16 +38,6 @@
   <img src="https://github.com/majdroses21/hackathon-team-72-MM/assets/112196607/20dbc878-c915-4ef8-a766-6eaf65911b2c" width="300">
   <img src="https://github.com/majdroses21/hackathon-team-72-MM/assets/112196607/6d97a12f-091a-4c7e-9c66-5d7026e42189" width="300">
   <img src="https://github.com/majdroses21/hackathon-team-72-MM/assets/112196607/90b09dae-6063-4992-ac00-cd14d5c53b9b" width="300">
-
-</div>
-
-
-
-## After announcing the results, we won ninth place, and everyone received a certificate of appreciation
-<div>
-  <img src='https://github.com/majdroses21/hackathon-team-72-MM/assets/112196607/1a0ba62d-3e20-48f6-877c-37a7d4dbb2a7' >
-<!--   <img src='https://github.com/majdroses21/hackathon-team-72-MM/assets/112196607/1a0ba62d-3e20-48f6-877c-37a7d4dbb2a7' width='500'>  -->
-
 
 </div>
 
