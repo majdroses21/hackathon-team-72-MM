@@ -41,6 +41,16 @@
 
 </div>
 
+
+
+## After announcing the results, we won ninth place, and everyone received a certificate of appreciation
+<div>
+  <img src='https://github.com/majdroses21/hackathon-team-72-MM/assets/112196607/1a0ba62d-3e20-48f6-877c-37a7d4dbb2a7' >
+<!--   <img src='https://github.com/majdroses21/hackathon-team-72-MM/assets/112196607/1a0ba62d-3e20-48f6-877c-37a7d4dbb2a7' width='500'>  -->
+
+
+</div>
+
 ## Project setup
 #### Follow these steps to set up and run the project on your local machine:
 
