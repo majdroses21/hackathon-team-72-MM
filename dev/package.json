@@ -12,8 +12,10 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@nuxtjs/fontawesome": "^1.1.2",
+    "@pinia/nuxt": "^0.5.1",
     "axios": "^1.6.8",
     "nuxt": "^3.11.0",
+    "pinia": "^2.1.7",
     "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",

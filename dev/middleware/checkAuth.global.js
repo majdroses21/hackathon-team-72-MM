@@ -1,7 +1,8 @@
 export default defineNuxtRouteMiddleware(
     (to, from)=>{
         if (useCookie("token").value) {
-          useState("loggedIn", () => true);    
+          useCookie("loggedIn").value = true; 
+          
           if (to.name == "Sign-in" || to.name == "register") {
             return navigateTo({name: "index"})
           }   

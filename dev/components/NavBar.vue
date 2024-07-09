@@ -11,7 +11,7 @@
             <v-avatar class="photoprofile">
               <v-img alt="John" :src="userImg"></v-img>
             </v-avatar>
-            <h3 class="ml-1">{{ firstName }}</h3>
+            <h3 class="ml-1">{{ userName.split(' ')[0] }}</h3>
           </div>
         </nuxt-link>
         <!-- User Coins -->
@@ -151,9 +151,8 @@
 }
 </style>
 <script setup>
-import { watch, ref } from "vue";
 import { useDisplay } from "vuetify";
-let isLogged = useState("loggedIn", () => false);
+let isLogged = useCookie("loggedIn").value; 
 
 // Destructure only the keys you want to use
 const { smAndDown } = useDisplay();
@@ -163,29 +162,25 @@ const group = ref(null);
 watch(group, () => {
   drawer.value = false;
 });
-import useUserState from '~/composables/myProfileInfoState.js'
 
-//
-const {
-  userName,
-  userImg,
-  usrCoins,
-  firstName,
-  fullName,
-  fetchUserProfile
-} = useUserState()
-
-// Fetch user profile when component is mounted
-fetchUserProfile()
-
+// Import Stor Settings
+import { userStore } from '@/store/myProfileData';
+const store = userStore();
+const {userName ,userImg ,usrCoins  } = storeToRefs(store) ;
+console.log('userName', userName.value);
+onMounted(async () => {
+  await store.fetchUserProfile();
+})
 const logMeOut = async () => {
   try {
+    useCookie("loggedIn").value = false;
+    useCookie("token").value = null;
     let { data, error } = await useDataApi('/api/logout');
     if (data.value.status) {
       useSonner.success(data.value.msg);
-      useCookie("token").value = null;
       setTimeout(() => {
-        navigateTo({ name: "index" })
+        navigateTo({ name: "index" });
+        window.location.reload();
       }, 2000);
     } else {
       useSonner.error(data.value.msg);

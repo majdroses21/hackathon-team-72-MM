@@ -4,8 +4,9 @@
       <NuxtPage />
       <v-sooner />
       <div class="poupup" v-if="loggedIn">
-        <v-dialog v-model="hasFilledData" persistent max-width="450px">
-      {{ hasFilledData }}
+        <v-dialog v-model="hasUserFilledData" max-width="450px">
+          <!-- {{ hasFilledData }} -->
+          {{ hasUserFilledData + ' ' + profilArr.length }}
           <v-form @submit.prevent>
             <v-stepper :items="['Step 1', 'Step 2', 'Step 3',]">
               <template v-slot:item.1>
@@ -99,10 +100,31 @@ body {
 </style>
 
 <script setup>
+// Import Stor Settings
+import { userStore } from '@/store/myProfileData';
+const  store = userStore();
+const  { usrId, profilArr, userName, usrRating } = storeToRefs(store);
+
+// This For To know if show the popup or hid it
+let popupStatus = ref(profilArr);
+  useCookie('hasUserFilledData');
+  if (popupStatus.value == 0) { // its Main User not fiils data yat => PopUp is showen => it's True
+    useCookie('hasUserFilledData').value = true
+  } else {
+    useCookie('hasUserFilledData').value = false
+  }
+  console.log(popupStatus.value);
+
+  let hasUserFilledData = ref(useCookie('hasUserFilledData'));
+
+
+
+// Here I Get The data  filds Forme The Forme And Send it to tha db  
 import useDataApi from "~/composables/useDataApi";
-const router = useRouter();
-let loggedIn = useState("loggedIn", () => false);
-// The Forme info gte data to sen 
+
+// const router = useRouter();
+let loggedIn = ref(useCookie("loggedIn"));
+// The Forme info gte data to sent
 const subSkills = ref("");
 const jobTitle = ref("");
 const education = ref("");
@@ -111,19 +133,6 @@ const resume = ref("");
 const platformLink = ref("");
 const profilePicture = ref("");
 const coverPhoto = ref("");
-
-// Get UserId From Composbels 
-import useUserState from '~/composables/myProfileInfoState.js'
-const {
-  usrId,
-  hasFilledData,
-  usrRating,
-  fetchUserProfile
-} = useUserState()
-fetchUserProfile()
-
-
-useState("hasFilledData").value = true;
 
 
 // This Ruls For Form Valdations
@@ -134,9 +143,10 @@ const rules = {
   email: value => /.+@.+\..+/.test(value) || "Invalid email address"
 };
 
-//  in here i'm feching this api to get the info showing in the Select 
+//  in here i'm feching this api to get the info showing in the Select in The Forme
 let skilsArray = ref([]);
 let topicsArray = ref([]);
+
 const fechDataForSelects = async () => {
   try {
     const { data, error } = await useDataApi('/api/getUserProfile');
@@ -157,19 +167,18 @@ const onFileChange = (event, type) => {
     coverPhoto.value = file;
   }
 };
-
 // This For Submit The Data 
 const submitForm = async () => {
   const formData = new FormData();
-  // formData.append('user_id', 5);
-  formData.append('user_id', usrId.value); // sometime sudnlly cant get the usrId
+  formData.append('user_id', usrId.value);
   formData.append('skill_id', subSkills.value);
   formData.append('jobTitle', jobTitle.value);
   formData.append('education', education.value);
   formData.append('currentJob', currentJob.value);
   formData.append('resume', resume.value);
   formData.append('platformLink', platformLink.value);
-  formData.append('rating', 3);
+  // formData.append('rating', 3);
+  formData.append('rating', usrRating.value);
   formData.append('img', profilePicture.value[0]);
   formData.append('coverImg', coverPhoto.value[0]);
   const { data, error } = await useDataApi("/api/setUserProfile", {
@@ -177,14 +186,10 @@ const submitForm = async () => {
     body: formData,
   });
 
-  if (data.value.message == "Insert successfully") {
-    useState("hasFilledData").value = false;
-    useSonner.success(data.value.msg);
-  } else {
-    useSonner.error(data.value.msg)
-  }
-  
-};
 
+};
+onMounted(async () => {
+   await store.fetchUserProfile();
+})
 
 </script>

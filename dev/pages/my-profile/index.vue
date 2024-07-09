@@ -15,7 +15,7 @@
                             <v-btn color="rgb(134, 41, 145)" icon="mdi-camera-plus" class="change-pic"></v-btn>
                         </dev>
                         <div class="user-info">
-                            <span class="userName">{{ userName }}</span>
+                            <span class="userName">{{ userName}}</span>
                             <v-rating :model-value="usrRating" color="amber" density="compact" size="x-large"
                                 half-increments readonly></v-rating>
                         </div>
@@ -33,8 +33,8 @@
 
             <v-form dir="rtl">
                 <div class="d-flex">
-                    <v-text-field class="ml-3 mr-3" v-model="lastName" label="الاسم الأخير"></v-text-field>
-                    <v-text-field class="ml-3 mr-3" v-model="firstName" label="الاسم الأول" dir="auto"></v-text-field>
+                    <v-text-field class="ml-3 mr-3" v-model="userName.split(' ')[1]" label="الاسم الأخير"></v-text-field>
+                    <v-text-field class="ml-3 mr-3" v-model="userName.split(' ')[0]" label="الاسم الأول" dir="auto"></v-text-field>
                 </div>
                 <div class="d-flex">
                     <v-text-field class="ml-3 mr-3" v-model="userEmail" label="عنوان البريد الإلكتروني"></v-text-field>
@@ -53,29 +53,9 @@
 </template>
 
 <script setup>
-import useUserState from '~/composables/myProfileInfoState.js'
-
-const { 
-  userName, 
-  usrId, 
-  userEmail, 
-  userImg, 
-  usrCovImg, 
-  usrCoins, 
-  usrRating, 
-  firstName,
-  lastName,
-  fullName, 
-  fetchUserProfile 
-} = useUserState()
-
-// Fetch user profile when component is mounted
-fetchUserProfile()
-// Update Forme
-
-
-
-
+import { userStore } from '@/store/myProfileData';
+const  store = userStore();
+const  { userName, userEmail, usrRating ,userImg ,usrCovImg } = storeToRefs(store);
 </script>
 
 <style scoped>

@@ -130,8 +130,12 @@
 import useDataApi from "~/composables/useDataApi";
 // Data
 const email = ref("mjd@gmail.com");
-const password = ref("123123");
+const password = ref("Abcd1234");
 let alertStatus = false;
+
+definePageMeta({
+  layout: ""
+})
 
 // This will Show and hide the pasword
 const showPassword = ref(false);
@@ -164,11 +168,12 @@ const submitForm = async () => {
     // login success
     if (loginStatus) {
       useCookie("token").value = token
-      useState("loggedIn", () => true);
+      
       alertStatus = true;
       useSonner.success(loginMessege);
       setTimeout(() => {
         navigateTo("/");
+        useCookie("loggedIn").value = true;
       }, 1000);
     }
   } catch (error) {

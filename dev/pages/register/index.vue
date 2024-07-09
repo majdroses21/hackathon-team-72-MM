@@ -43,9 +43,6 @@
   top: 12px;
 }
 
-.Creat {
-  margin-top: 64px;
-}
 
 .forgetpass {
   color: rgb(2 121 255) !important;
@@ -122,6 +119,9 @@
 
 <script setup>
 import useDataApi from "~/composables/useDataApi";
+definePageMeta({
+  layout: ''
+})
 //Data
 const email = ref("");
 const firstName = ref("");
@@ -144,6 +144,7 @@ const registerHandler = async () => {
 
     //Second log in the user created 
     const loginRes = await useDataApi("/api/login", {
+      method: 'POST',
       query: {
         email,
         password,
@@ -155,6 +156,7 @@ const registerHandler = async () => {
     useSonner.success("You has create your accout successffly and Logged in Wellcome");
     setTimeout(() => {
       navigateTo("/");
+      useCookie("loggedIn").value = true;
     }, 1500);
 
     

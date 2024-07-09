@@ -4,10 +4,12 @@ export default defineNuxtRouteMiddleware((to, from) => {
     // User + dashboard
     // User + guest
 
-    const loggedIn = useState('loggedIn', ()=>false)
+    // const loggedIn = useState('loggedIn', ()=>false)
+    const loggedIn = useCookie("loggedIn").value = false; 
 
 
-    if(loggedIn.value) return navigateTo('/dashboard')
+
+    if(loggedIn) return navigateTo('/dashboard')
 
 
     // const guestPages
