@@ -17,7 +17,7 @@ export const userStore = defineStore("user", {
     async fetchUserProfile() {
       try {
         const userProfilData = await useDataApi("/api/profile");
-        console.log("%cFierd", "color: red;");
+        // console.log("%cFierd", "color: red;");
         const myData = userProfilData.data.value.data;
 
         this.usrId = myData.id;

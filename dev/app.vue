@@ -4,7 +4,8 @@
       <NuxtPage />
       <v-sooner />
       <div class="poupup" v-if="loggedIn">
-        <v-dialog v-model="hasUserFilledData" max-width="450px">
+        <!-- Remove persistent  To Asccess To Close The Popup  -->
+        <v-dialog v-model="hasUserFilledData" persistent  max-width="450px">
           <!-- {{ hasFilledData }} -->
           {{ hasUserFilledData + ' ' + profilArr.length }}
           <v-form @submit.prevent>

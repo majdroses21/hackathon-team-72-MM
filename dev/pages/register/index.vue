@@ -132,7 +132,7 @@ const birthday = ref("");
 
 const registerHandler = async () => {
   try {
-    const registerRes = await useDataApi('/api/register', {
+    const { data , error } = await useDataApi('/api/register', {
       method: 'POST',
       body: {
         name: firstName.value + ' ' + lastName.value,
@@ -142,6 +142,7 @@ const registerHandler = async () => {
       }
     });
 
+    if (data.value.status) {
     //Second log in the user created 
     const loginRes = await useDataApi("/api/login", {
       method: 'POST',
@@ -158,7 +159,10 @@ const registerHandler = async () => {
       navigateTo("/");
       useCookie("loggedIn").value = true;
     }, 1500);
-
+    } else {
+      useSonner.error(data.value.msg.email[0] ||  data.value.msg.name[0] || data.value.msg.password[0]);
+    }
+    
     
   } catch (error) {
     console.error('error = ', error)

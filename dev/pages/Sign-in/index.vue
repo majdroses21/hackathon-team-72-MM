@@ -91,8 +91,8 @@
 
             <v-text-field class="pass" label="الرقم السري *" :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
               :type="showPassword ? 'text' : 'password'" @click:append="toggleShowPassword" v-model="password"
+              :rules="[rules.required, rules.minLength]"
               required></v-text-field>
-            <!-- :rules="[rules.required, rules.minLength]" -->
             <div class="pl-3 pr-3 d-flex flex-column ga-2">
               <p>
                 <NuxtLink class="text-sm font-semibold text-primary forgetpass" to="/forgot-password">forgot passwor?
@@ -115,9 +115,7 @@
       </div>
     </v-container>
   </div>
-  <!-- TODO: Fix Aletrs With Api Call -->
 
-  <!-- Success Alert -->
   <!-- title="Loged in Succesfuly" -->
   <v-alert :text="loginMessege" type="success" closable v-model="alertStatus" class="login-alert"></v-alert>
   <!-- Error Alert -->
@@ -129,8 +127,8 @@
 
 import useDataApi from "~/composables/useDataApi";
 // Data
-const email = ref("mjd@gmail.com");
-const password = ref("Abcd1234");
+const email = ref("");
+const password = ref("");
 let alertStatus = false;
 
 definePageMeta({
@@ -175,6 +173,9 @@ const submitForm = async () => {
         navigateTo("/");
         useCookie("loggedIn").value = true;
       }, 1000);
+    }else{
+      console.log(loginMessege);
+      useSonner.error(loginMessege)
     }
   } catch (error) {
     useSonner.error("Error: ", error.response.message);
