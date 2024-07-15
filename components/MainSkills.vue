@@ -22,11 +22,11 @@
             <v-img
               class="align-end text-white"
               height="200"
-              :src="`http://127.0.0.1:8000` + mSkill.img"
+              :src="`https://api-mahrtex.000webhostapp.com` + mSkill.img"
               cover
             >
+          </v-img>
             <!-- TODO: When i uplod the API to server change this link -->
-            </v-img>
 
             <v-card-text>
               <h1 style="text-align: center">{{ mSkill.name_ar }}</h1>
