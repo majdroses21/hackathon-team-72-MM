@@ -178,7 +178,7 @@ const submitForm = async () => {
   formData.append('currentJob', currentJob.value);
   formData.append('resume', resume.value);
   formData.append('platformLink', platformLink.value);
-  // formData.append('rating', 3);
+  formData.append('rating', 3);
   formData.append('rating', usrRating.value);
   formData.append('img', profilePicture.value[0]);
   formData.append('coverImg', coverPhoto.value[0]);
