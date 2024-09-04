@@ -22,7 +22,7 @@
             <v-img
               class="align-end text-white"
               height="200"
-              :src="`https://api-mahrtex.000webhostapp.com` + mSkill.img"
+              :src="`http://127.0.0.1:8000` + mSkill.img"
               cover
             >
           </v-img>

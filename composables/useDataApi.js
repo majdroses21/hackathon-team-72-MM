@@ -17,7 +17,7 @@ export default function (
 // https://api-mahrtex.000webhostapp.com
 //http://api-mx.byethost7.com
 // http://127.0.0.1:8000
-  return useFetch('https://api-mahrtex.000webhostapp.com' + request, {
+  return useFetch('http://127.0.0.1:8000' + request, {
     ...opts,
     headers,
   })
