@@ -53,6 +53,7 @@
 <style>
 body {
   box-sizing: border-box;
+
 }
 
 /* width */
@@ -62,12 +63,12 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #8729917f;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #872991ba;
   border-radius: 9px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
@@ -120,7 +121,7 @@ let popupStatus = ref(profilArr);
 
 
 
-// Here I Get The data  filds Forme The Forme And Send it to tha db  
+// Here I Get The data  filds Forme The Forme And Send it to tha db
 import useDataApi from "~/composables/useDataApi";
 
 // const router = useRouter();
@@ -168,7 +169,7 @@ const onFileChange = (event, type) => {
     coverPhoto.value = file;
   }
 };
-// This For Submit The Data 
+// This For Submit The Data
 const submitForm = async () => {
   const formData = new FormData();
   formData.append('user_id', usrId.value);
